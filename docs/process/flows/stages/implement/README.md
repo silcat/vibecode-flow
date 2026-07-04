@@ -12,6 +12,17 @@
 | 验证检查清单 | `docs/skills/engineering/verification-checklist/SKILL.md` |
 | 代码质量审计提示词 | `docs/skills/audit/code-quality-audit-prompt.md` |
 
+## 前置（阻断）
+
+编码前必须完成以下自检，全部打勾后才允许创建或修改代码文件：
+
+- [ ] 已读取 `docs/baseline/context/conventions.md` 路由表
+- [ ] 已匹配本次变更触发的全部 standards/ 文件，逐条读取
+- [ ] 已读取 `docs/skills/engineering/tdd/SKILL.md`
+- [ ] 已在对话中输出匹配摘要（文件名 + 触发场景）
+
+缺失任一条 → 回退到收集/澄清阶段补全，不得进入实施。
+
 ## 执行
 
 - 有计划：将 plan.md frontmatter `status` 改为 `in-progress`，更新 registry.md（设为当前激活，状态 🔄）

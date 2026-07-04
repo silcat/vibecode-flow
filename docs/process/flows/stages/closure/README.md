@@ -36,3 +36,13 @@
 ## 回退
 
 关卡未过 → implement
+## 前置（阻断）
+
+闭环审计前，必须逐项检查并更新以下文档。全部打勾后才允许进入审计：
+
+- [ ] `docs/baseline/context/codebase-map.md` — 入口点、变更路由、脆弱文件是否反映当前实际
+- [ ] `docs/baseline/architecture/module-internals.md` — 新增模块/包的内部结构是否已记录
+- [ ] `docs/baseline/architecture/module-boundaries.md` — 新增服务/职责变更是否已注册
+- [ ] `docs/baseline/context/project-context.md` — 新技术栈是否已注册
+
+缺失任一条 → 先更新文档，再进入审计。不得以"稍后补"为由跳过。

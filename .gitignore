@@ -7,3 +7,9 @@ coverage/
 *.tsbuildinfo
 tmp/
 report/
+
+target/
+*.class
+*.jar
+*.log
+.env

@@ -2,11 +2,11 @@
 
 ## 项目标识
 
-<项目名称>
+vibecode-flow-init
 
 ## 文档新鲜度
 
-`unknown`
+`fresh`
 
 值域和维护规则见 `docs/baseline/context/ai-autonomy-policy.md`。
 
@@ -37,11 +37,11 @@
 
 | 用途 | 命令 |
 |------|------|
-| 安装依赖 | `mvn clean install -DskipTests` |
-| 编译检查 | `mvn compile` |
-| 单元测试 | `mvn test` |
-| 集成测试 | `mvn verify -P integration` |
-| 本地运行 | `docker-compose up -d`（Nacos / MySQL / Redis / Kafka），然后按服务逐个 `mvn spring-boot:run` |
+| 安装依赖（平台） | `mvn clean install -DskipTests` |
+| 编译检查（平台） | `mvn compile` |
+| 单元测试（平台） | `mvn test` |
+| 集成测试（平台） | `mvn verify -P integration` |
+| 本地运行（平台） | `docker-compose up -d`（Nacos / MySQL / Redis / Kafka），然后按服务逐个 `mvn spring-boot:run` |
 
 ## 当前启用的可选层
 
@@ -68,3 +68,28 @@
 - **审查触发**：修改超过 5 个文件、涉及保护区、或修改 Feign 接口时触发独立审计
 
 
+## chat-agent 技术基线
+
+独立项目，后续接入微服务体系。
+
+- 后端：Java（Spring Boot 3.2）
+- 前端：Vue 3
+- LLM：Spring AI + DeepSeek API（spring-ai-openai，统一 ChatClient 抽象层，后续可插拔）
+- 向量存储：HNSW（Apache Lucene 内嵌索引，独立阶段零外部依赖）
+- 向量存储（微服务阶段）：Milvus
+- MCP：Spring AI MCP（spring-ai-mcp，工具自动注册到 ChatClient）
+- 文档解析：Apache Tika
+- 嵌入模型：DeepSeek Embedding API
+
+| 模块 | 端口 |
+|------|------|
+| chat-agent 后端 | 8090 |
+
+### 验证命令（chat-agent）
+
+| 用途 | 命令 |
+|------|------|
+| 后端编译 | `mvn compile -f chat-agent/pom.xml` |
+| 后端测试 | `mvn test -f chat-agent/pom.xml` |
+| 后端运行 | `mvn spring-boot:run -f chat-agent/pom.xml` |
+| 前端运行 | `cd chat-agent-ui && npm run dev` |

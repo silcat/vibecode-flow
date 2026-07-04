@@ -2,7 +2,7 @@
 
 ## 项目意图
 
-<项目名称> 使用轻量级的吸引子引导工程（Attractor-Guided Engineering）工作流进行 AI 辅助的后端微服务系统开发。
+vibecode-flow-init 使用轻量级的吸引子引导工程（Attractor-Guided Engineering）工作流进行 AI 辅助的后端微服务系统开发。
 
 本仓库面向后端微服务系统，不是框架核心项目。
 
@@ -90,3 +90,4 @@ AI 代理收到请求后，按以下前置路由执行：
 使用 docs/baseline/context/project-context.md 中列出的真实命令。
 如果验证命令为空或仍为占位符，先停下来填充它们，再报告验证成功。
 
+16. 编码或修改代码前，必须先读取 `docs/baseline/context/conventions.md`，按路由表匹配本次变更触发的全部 standards/ 和 skills/ 文件，读取后在对话中输出匹配摘要（文件名 + 匹配的触发场景）。缺失摘要 = 不得创建或修改任何代码文件。
