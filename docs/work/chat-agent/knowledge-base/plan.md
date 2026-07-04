@@ -1,6 +1,6 @@
 ﻿---
 branch: codex/feature-chat-agent
-status: planned
+status: completed
 autonomy: implement
 type: sub
 requirement: requirement.md

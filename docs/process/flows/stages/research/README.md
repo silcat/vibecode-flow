@@ -9,13 +9,18 @@
 | 如果你需要… | 先读 |
 |-------------|------|
 | 执行技术评估的 6 维度框架 | [evaluation-framework.md](evaluation-framework.md) |
-| 调研报告模板 | [template.md](template.md) |
+| 调研报告模板 | [research-template.md](research-template.md) |
+| tech skill 模板 | [skill-template.md](../../../../skills/tech/skill-template.md) |
 
 ## 执行
 
 见 [evaluation-framework.md](evaluation-framework.md)
 
-产出：`docs/work/<branch>/research.md`
+## 产出
+
+- `docs/work/<branch>/research.md` — 技术选型评估与决策
+- `docs/skills/tech/<tech-name>/SKILL.md` — 开箱即用技能指南（每个新引入的技术一份）
+- `docs/skills/tech/<tech-name>/refer/` — 学习资料目录（按需）
 
 ## 退出
 
@@ -24,6 +29,7 @@
 ## 回退
 
 调研改变需求范围 → requirement
+
 ## 退出条件（阻断）
 
 `research.md` 结论部分必须由人类审查并填写批准记录后，才允许退出本阶段。
@@ -31,5 +37,8 @@
 - [ ] 人类已审查推荐方案和弃用理由
 - [ ] 人类已确认风险缓解措施可接受
 - [ ] 人类已在结论栏填写批准记录
+- [ ] **每个新引入的技术均已创建 SKILL.md**（至少包含快速接入 + 核心代码片段）
+
+- [ ] **每个新引入的技术均已创建 refer/README.md**（至少包含官方文档链接 + 关键概念摘要）
 
 缺失任一条 → 保持阻塞，不得进入 baseline 或后续阶段。

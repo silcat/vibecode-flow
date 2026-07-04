@@ -36,8 +36,8 @@ docs/work/
 
 | 子计划目录 | 依赖 | 可并行 |
 |-----------|------|--------|
-| refactor-login | 无 | ✅ |
-| refactor-permission | refactor-login | ❌ |
+| refactor-login | 无 | yes |
+| refactor-permission | refactor-login | no |
 
 目录名为总计划目录下的子目录名。依赖 = 必须在哪个子计划完成后才能开始。可并行 = 依赖已全部 `completed` 的组内子计划 AI 可自主编排执行顺序。
 
@@ -86,7 +86,7 @@ docs/work/
 2. 按依赖图筛出依赖已全部 `completed` 的子计划
 3. 取清单声明顺序第一个可激活的子计划，激活并执行：
    - frontmatter `status` → `in-progress`
-   - registry 新增行（类型 `子计划 · <总计划目录>`，状态 🔄）
+   - registry 新增行（类型 `子计划 · <总计划目录>`，状态 in-progress）
    - 执行子计划流程
 4. 子计划完成（closure 通过，registry 删除该行，status `completed`）→ 回到 1
 5. 全部 `completed` → 集成审计
@@ -99,7 +99,7 @@ docs/work/
 
 ## 阻塞处理
 
-一个子计划 🚧：依赖它的暂停等待，不依赖的可继续。
+一个子计划 blocked：依赖它的暂停等待，不依赖的可继续。
 
 ## 集成审计
 
