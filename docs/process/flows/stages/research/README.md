@@ -42,3 +42,5 @@
 - [ ] **每个新引入的技术均已创建 refer/README.md**（至少包含官方文档链接 + 关键概念摘要）
 
 缺失任一条 → 保持阻塞，不得进入 baseline 或后续阶段。
+
+> 若 autonomy = implement：本阻断自动跳过（保护区操作除外）。AI 仍需产出 research.md + SKILL.md + refer/。见 `docs/baseline/context/ai-autonomy-policy.md` §implement 全自动模式。

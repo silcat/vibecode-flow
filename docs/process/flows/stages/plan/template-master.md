@@ -11,8 +11,8 @@
 ```yaml
 ---
 branch: feature-xxx            # 对应的 git 分支
-status: planned                # planned | in-progress | paused | blocked | completed
-autonomy: ask-first            # 总计划通常 ask-first（人类决策项目层）
+status: planned                # 取值见 docs/work/registry.md §字段来源
+
 type: master
 requirement: requirement.md    # 总需求文件路径
 created: 2026-06-26
@@ -31,7 +31,6 @@ AI 修改 frontmatter `status` 时须同步更新 `docs/work/registry.md`。
 ---
 branch: <分支名>
 status: planned
-autonomy: ask-first
 type: master
 requirement: requirement.md
 created: <日期>

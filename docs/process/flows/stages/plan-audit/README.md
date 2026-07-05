@@ -42,3 +42,6 @@
 - [ ] 计划声明技术栈变更 → 已同步到 `docs/baseline/architecture/system-baseline.md`
 
 缺失任一条 → 先同步基线，再进入审计。不得以"实施后补"为由跳过。
+
+
+> 若 autonomy = implement：计划审计自动通过，直接进入 implement 阶段（保护区操作除外）。见 docs/baseline/context/ai-autonomy-policy.md §implement 全自动模式。

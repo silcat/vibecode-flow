@@ -1,7 +1,6 @@
 ﻿---
 branch: codex/feature-chat-agent
 status: completed
-autonomy: ask-first
 type: master
 requirement: requirement.md
 created: 2026-07-05

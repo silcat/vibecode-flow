@@ -50,24 +50,6 @@ vibecode-flow-init
 - [x] `docs/baseline/architecture/`
 - [x] `docs/baseline/standards/`
 
-## AI 阻塞条件
-
-以下情况 AI 必须停止并等待人类输入：
-
-- 涉及支付、退款、资金流转的代码变更
-- 修改 Gateway 认证/鉴权过滤器
-- 修改 Kafka topic 定义或消费者组
-- 修改数据库 schema（DDL）
-- 任何变更触及两个以上微服务的公共契约
-- 修改 API 版本化策略或废弃现有 API 版本
-
-## AI 自治策略
-
-- **自治级别**：`实施`——AI 可直接编写代码、运行验证，无需逐条确认
-- **保护区**：支付/资金相关代码、Gateway 过滤器、DDL、跨服务契约变更、API 版本废弃 → 必须先写入 `discussion.md` 等待确认
-- **审查触发**：修改超过 5 个文件、涉及保护区、或修改 Feign 接口时触发独立审计
-
-
 ## chat-agent 技术基线
 
 独立项目，后续接入微服务体系。

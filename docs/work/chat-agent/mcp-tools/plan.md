@@ -1,7 +1,6 @@
 ﻿---
 branch: codex/feature-chat-agent
 status: completed
-autonomy: implement
 type: sub
 requirement: requirement.md
 created: 2026-07-05

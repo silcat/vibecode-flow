@@ -50,6 +50,10 @@ docs/work/
 
 ## 状态派生
 
+状态取值见 `docs/work/registry.md` §字段来源。
+
+
+
 编排循环在每次子计划状态变更后，按以下规则更新总计划 frontmatter `status`。registry 的 `状态` 列随 frontmatter 自动同步（见 registry §字段来源）：
 
 - 全部 `planned` → `planned`
@@ -86,15 +90,15 @@ docs/work/
 2. 按依赖图筛出依赖已全部 `completed` 的子计划
 3. 取清单声明顺序第一个可激活的子计划，激活并执行：
    - frontmatter `status` → `in-progress`
-   - registry 新增行（类型 `子计划 · <总计划目录>`，状态 in-progress）
+   - registry 新增行（类型 子计划，状态 in-progress）
    - 执行子计划流程
-4. 子计划完成（closure 通过，registry 删除该行，status `completed`）→ 回到 1
+4. 子计划完成（closure 通过，registry 状态改为 `completed`）→ 回到 1
 5. 全部 `completed` → 集成审计
 6. 无可激活子计划但存在未完成 → 检查 `blocked`：有则报告等人类决策；无则回到 1 等待依赖满足
 
 ### 中断恢复
 
-- registry "当前激活"为子计划 → 继续该子计划当前阶段
+- registry "当前激活"为子计划 → 读取 autonomy 级别，继续该子计划当前阶段
 - 无当前激活 → 从编排循环步骤 1 重新扫描
 
 ## 阻塞处理
@@ -116,7 +120,7 @@ docs/work/
 集成审计通过后：
 1. 追加项目完结日志（见 [log/README.md](../log/README.md) §项目完结条目）
 2. 总计划 frontmatter `status` → `completed`
-3. 子计划已从 registry 删除；总计划目录保留为归档
+3. 子计划 registry 状态改为 `completed`；总计划目录保留为归档
 
 ## 属于这里的
 

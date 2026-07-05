@@ -1,19 +1,19 @@
 ﻿# 计划注册表
 
-> AI 维护。仪表盘，列所有计划（已完成的不在此表）。树形缩进表示父子关系。
+> AI 维护。仪表盘，列所有计划。树形缩进表示父子关系。已完成计划保留不删。
 
 ## 当前激活
 
-chat-agent — 企业级 AI 聊天 agent（对话 + RAG + MCP）[completed]
+chat-agent — 企业级 AI 聊天 agent（对话 + RAG + MCP）[completed] [implement]
 
-## 全部未完成
+## 全部计划
 
-| 计划 | 类型 | 父计划 | 状态 | 阶段 | 更新 |
-|------|------|--------|------|------|------|
-| chat-agent | 总计划 | — | completed | — | 2026-07-05 |
-| 　├ chat-core | 子计划 | chat-agent | completed | — | 2026-07-05 |
-| 　├ knowledge-base | 子计划 | chat-agent | completed | — | 2026-07-05 |
-| 　└ mcp-tools | 子计划 | chat-agent | completed | — | 2026-07-05 |
+| 计划 | 类型 | 父计划 | 状态 | 自治 | 阶段 | 更新 |
+|------|------|--------|------|------|------|------|
+| chat-agent | 总计划 | — | completed | ask-first | — | 2026-07-05 |
+| 　├ chat-core | 子计划 | chat-agent | completed | implement | — | 2026-07-05 |
+| 　├ knowledge-base | 子计划 | chat-agent | completed | implement | — | 2026-07-05 |
+| 　└ mcp-tools | 子计划 | chat-agent | completed | implement | — | 2026-07-05 |
 
 ---
 
@@ -35,8 +35,8 @@ chat-agent — 企业级 AI 聊天 agent（对话 + RAG + MCP）[completed]
 
 ### 注销
 
-- 独立计划 / 子计划完成时 → 闭环审计通过后**删除此行**，清除"当前激活"
-- 主计划完成时 → 所有子计划行已删除 + 集成审计通过后，删除主计划行，清除"当前激活"
+- 独立计划 / 子计划完成时 → 闭环审计通过后，状态改为 `completed`，清除"当前激活"
+- 主计划完成时 → 所有子计划 completed + 集成审计通过后，状态改为 `completed`，清除"当前激活"
 
 ### 恢复
 
@@ -48,8 +48,9 @@ chat-agent — 企业级 AI 聊天 agent（对话 + RAG + MCP）[completed]
 | registry 列 | frontmatter 字段 | 映射 |
 |------------|-----------------|------|
 | 计划 | — | 目录名，人工指定 |
-| 类型 | `type` | `standalone` → 独立计划；`master` → 总计划；`sub` → 子计划 |
+| 类型 | `type` | `standalone` → 独立计划；`sub` → 子计划。`master` → 总计划，见 `docs/process/flows/stages/plan/template-master.md` |
 | 父计划 | `parent` | 子计划从 `parent` 提取父目录名；其他 → `—` |
 | 状态 | `status` | 直接同步。取值：`planned` / `in-progress` / `paused` / `blocked` / `completed` |
+| 自治 | 手动设置 | 唯一控制点。取值：`implement` / `plan-first` / `ask-first` / `research-only` / `blocked`。默认值见 `docs/process/flows/stages/plan/template.md`。含义见 `docs/baseline/context/ai-autonomy-policy.md` |
 | 阶段 | — | 当前实施的阶段名（如 `阶段 2`），无则 `—` |
 | 更新 | `updated` | 直接同步 |

@@ -25,7 +25,7 @@
 
 ## 执行
 
-- 有计划：将 plan.md frontmatter `status` 改为 `in-progress`，更新 registry.md（设为当前激活，状态 in-progress）
+- 有计划：将 plan.md frontmatter `status` 改为 `in-progress`，更新 registry.md（设为当前激活，状态 in-progress（取值见 `docs/work/registry.md` §字段来源））
 - 无计划（轻量路径）：跳过注册表更新
 - 读取 plan.md（如有），锚定实施范围（触及面 + 公共契约 + 非目标）
 - 按 `docs/skills/engineering/tdd/SKILL.md` 执行 TDD 循环（RED → GREEN → REFACTOR）

@@ -23,6 +23,8 @@
 
 缺失任一条 → 保持阻塞，不得修改基线文件。
 
+> 若 autonomy = implement：本阻断自动跳过（保护区操作除外）。AI 仍需产出影响矩阵并执行基线更新。见 `docs/baseline/context/ai-autonomy-policy.md` §implement 全自动模式。
+
 ## 执行
 
 对照需求文档和影响矩阵，更新以下基线文件：
