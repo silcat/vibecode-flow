@@ -10,6 +10,21 @@
 |-------------|------|
 | 执行闭环审计的具体步骤 | [audit-prompt.md](audit-prompt.md) |
 
+## 前置（阻断）
+
+闭环审计前，必须逐项检查并更新以下文档。全部打勾后才允许进入审计：
+
+- [ ] 已对照实施计划逐阶段检查：所有阶段的闭环关卡均通过（附证据）
+- [ ] 已执行 plan.md 中声明的全部验证命令，捕获实际输出
+- [ ] 已输出"闭环证据链"：每条验收标准 → 对应测试/验证输出 → 通过/失败
+- [ ] `docs/baseline/context/codebase-map.md` — 入口点、变更路由、脆弱文件是否反映当前实际
+- [ ] `docs/baseline/architecture/module-internals.md` — 新增模块/包的内部结构是否已记录
+- [ ] `docs/baseline/architecture/module-boundaries.md` — 新增服务/职责变更是否已注册
+- [ ] `docs/baseline/context/project-context.md` — 新技术栈是否已注册
+- [ ] 审计输出文件 `docs/audits/YYYY-MM-DD-closure-audit.md` 已生成
+
+缺失任一条 → 先完成缺失项，再进入审计。不得以"稍后补"为由跳过。
+
 ## 执行
 
 使用 [audit-prompt.md](audit-prompt.md) 独立复核。关卡未过即回退。
@@ -19,11 +34,6 @@
 ## 项目级别
 
 若当前工作为多计划（子计划），见 [program-management.md](../project/program-management.md)。子计划各自执行标准闭环审计；最后一个子计划闭环通过后触发集成审计。
-
-## 红线
-
-- 不可跳过闭环审计直接标记完成
-- 不可自行放宽关卡
 
 ## 产出
 
@@ -35,4 +45,4 @@
 
 ## 回退
 
-关卡未过 → implement
+关卡未过 → 将失败关卡对应的阶段从 `completed` 回退为 `in-progress`，同步 registry，然后退回 implement

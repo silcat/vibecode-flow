@@ -10,8 +10,11 @@
 
 1. `system-baseline.md` — 技术栈选型与版本、外部平台（含调研和技能引用）、验证命令
 2. `module-boundaries.md` — 模块/服务清单（含端口）、依赖方向、数据所有权
-3. `module-internals.md` — 模块内分层结构、层间依赖规则、信号驱动演进路径
-4. `business-flows.md` — 跨模块业务流程路由表
+3. `module-internals.md` — 原型选择路由（含已实施模块结构）
+4. `archetypes/` — 模块原型问题清单（按场景选原型 → 回答问题 → 产出结构）
+   - `archetypes/crud-service.md` — 标准 CRUD 业务模块
+   - `archetypes/agent-service.md` — LLM 驱动的 AI 智能体模块
+5. `business-flows.md` — 跨模块业务流程路由表
 
 ## 文件关系
 
@@ -19,7 +22,8 @@
 |------|------|------|
 | `system-baseline.md` | 技术栈、外部平台（含调研和技能引用）、验证命令 | 引用 `module-boundaries.md` |
 | `module-boundaries.md` | 服务清单（名称/端口/职责/数据/保护级别）、依赖拓扑 | 独立，被 `system-baseline.md` 和 `business-flows.md` 引用 |
-| `module-internals.md` | 模块内分层（controller/bo/repository/gateway/domain）、层间依赖方向、信号驱动演进 | 独立，被 `module-boundaries.md` 引用（模块内 vs 模块间） |
+| `module-internals.md` | 原型选择路由 + 已实施模块结构列表 | 引用 `archetypes/`，被 `module-boundaries.md` 引用 |
+| `archetypes/` | 模块原型问题清单（按场景选原型 → 回答问题 → 产出结构） | 被 `module-internals.md` 引用 |
 | `business-flows.md` | 跨模块调用时序、通道、失败策略 | 引用 `module-boundaries.md`（拓扑） |
 
 ## 属于这里的

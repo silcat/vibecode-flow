@@ -12,9 +12,22 @@
 | 了解当前技术标准（api、database、auth 等） | `docs/baseline/standards/` |
 | 了解当前项目上下文 | `docs/baseline/context/project-context.md` |
 
+## 前置（阻断）
+
+基线更新前，必须输出"基线影响分析"。全部打勾后才允许修改基线文件：
+
+- [ ] 已列出本次需求变更涉及的所有模块/服务名称（对照 requirement 逐条提取）
+- [ ] 已逐条判定：新增服务(Y/N)、职责变更(Y/N)、新技术引入(Y/N)、端口变更(Y/N)
+- [ ] 已输出"影响矩阵"：每条变更 → 对应基线文件 → 更新内容摘要
+- [ ] 影响矩阵经人类确认后，才执行文件写入
+
+缺失任一条 → 保持阻塞，不得修改基线文件。
+
+> 若 autonomy = implement：本阻断自动跳过（保护区操作除外）。AI 仍需产出影响矩阵并执行基线更新。见 `docs/baseline/context/ai-autonomy-policy.md` §implement 全自动模式。
+
 ## 执行
 
-对照需求文档，更新以下基线文件：
+对照需求文档和影响矩阵，更新以下基线文件：
 - `docs/baseline/architecture/`（模块边界、系统基线）
 - `docs/baseline/standards/`（api、database、auth 等）
 - `docs/baseline/context/project-context.md`

@@ -32,3 +32,16 @@
 | `sub` | 范围对齐 / 并行冲突（根因在总计划分配） | → 标记总计划待调整，本子计划及受影响并行子计划暂停；总计划调整并重新通过 `plan-audit` 后再继续 |
 
 子计划审计中若同时存在自身问题和总计划根因，先处理总计划根因（防止改完子计划又被总计划变更覆盖）。
+## 前置（阻断）
+
+审计开始前，必须将计划声明同步到基线文件。全部打勾后才允许进入审计：
+
+- [ ] 计划声明新服务/端口 → 已同步到 `docs/baseline/architecture/module-boundaries.md`
+- [ ] 计划声明新包/分层结构 → 已同步到 `docs/baseline/architecture/module-internals.md`
+- [ ] 计划声明新技术/外部依赖 → 已同步到 `docs/baseline/context/project-context.md`
+- [ ] 计划声明技术栈变更 → 已同步到 `docs/baseline/architecture/system-baseline.md`
+
+缺失任一条 → 先同步基线，再进入审计。不得以"实施后补"为由跳过。
+
+
+> 若 autonomy = implement：计划审计自动通过，直接进入 implement 阶段（保护区操作除外）。见 docs/baseline/context/ai-autonomy-policy.md §implement 全自动模式。

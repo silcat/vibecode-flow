@@ -19,7 +19,7 @@
 | 澄清模糊 | 材料不完整或矛盾 → 触发 | [clarify](stages/clarify/README.md) |
 | 合成需求 | 始终 | [requirement](stages/requirement/README.md) |
 | 范围判定 | 始终 | [scope](stages/scope/README.md) |
-| 技术调研 | 新技术/库/服务且无现有模块可参考 → 触发 | [research](stages/research/README.md) |
+| 技术调研 | 满足任一即触发：①项目无现有模块可参考 ②引入新外部依赖/平台 ③涉及未在 project-context.md 注册的技术 | [research](stages/research/README.md) |
 | 更新基线 | 变更系统基线 → 触发 | [baseline](stages/baseline/README.md) |
 
 跳过判定由本文件持有，阶段 README 不内置执行条件。

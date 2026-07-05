@@ -12,6 +12,12 @@
 | Bug 记录编写指南 | `docs/bugs/00-bug-fix-note-writing-guide.md` |
 | 回顾编写指南 | `docs/retro/00-retrospective-writing-guide.md` |
 
+## 前置（阻断）
+
+- [ ] 已搜索 `docs/logs/` 中错误/缺陷/回归/失败关键词的出现次数
+- [ ] 出现 ≥2 次的重复模式已列出并标注是否触发 skill 阶段
+- [ ] 本次变更涉及的任何非显而易见回归已写入 `docs/bugs/`
+
 ## 执行
 
 - 追加每日开发日志到 `docs/logs/YYYY/MM-DD.md`（倒序）
@@ -21,7 +27,7 @@
 
 ## 项目完结条目
 
-总计划完结时（所有子计划 ✅ + 集成审计通过），在每日日志中追加：
+总计划完结时（所有子计划 completed + 集成审计通过），在每日日志中追加：
 
 ```markdown
 ## 项目完结：<项目名>

@@ -100,6 +100,21 @@ AI 编写或 AI 修改的文档（包括所有者文档）不得作为放松自�
 
 ## 工作选择规则
 
+## implement 全自动模式
+
+当活跃计划的 `autonomy: implement` 时，AI 全自动运行直到完成：
+
+- 所有流程阶段中"需人类确认/审查/批准"的阻断条件**自动跳过**
+- AI 仍需产出所有阶段产物（research.md、plan.md、audit 文件、日志等）
+- 验证命令必须实际执行，输出捕获到产物中，不可跳过
+- 子计划全部完成时，集成审计自动触发，无需等待人类确认
+
+**例外**：保护区操作（支付、Gateway 认证/鉴权、DDL、Kafka topic、跨服务契约、API 版本废弃）即使在 implement 模式下仍需人类确认。
+
+其他自治级别（plan-first、ask-first、research-only、blocked）保持各自的人类确认逻辑不变。
+
+## 工作选择规则
+
 若用户要求 AI 继续工作但未指定任务，选择 `docs/work/registry.md` 中优先级最高、自治级别为 `implement` 且无阻塞条件的工作项。
 
 实施所选工作项前，重新检查计划触发条件。`Plan: none` 不免除计划指南。
