@@ -1,6 +1,6 @@
-﻿# 计划文件模板（单计划）
+# 计划文件模板（独立计划）
 
-适用：轻量级别、完整级别、项目级别的子计划。计划是**实施契约**，不是路线图。
+适用：scope=单计划的独立计划。计划是**实施契约**，不是路线图。
 
 ## 命名
 
@@ -12,8 +12,8 @@
 ---
 branch: feature-xxx            # 对应的 git 分支
 status: planned                # 取值见 docs/work/registry.md §字段来源
-type: standalone               # standalone | sub
-parent: none                   # 子计划指向主 plan.md（相对路径），无则写 none
+type: standalone
+parent: none
 requirement: requirement.md    # 需求文件路径（相对本目录），无则写 none
 created: 2026-06-26
 updated: 2026-06-26
@@ -23,10 +23,11 @@ blocker: none                  # 阻塞原因，无则写 none
 
 | 字段 | 说明 |
 |------|------|
-| `type` | `standalone` = 完整/轻量级别计划；`sub` = 项目级别的子计划 |
-| `requirement` | 子计划指向 AI 从总需求提取的 requirement.md |
+| `type` | 固定为 `standalone` |
+| `parent` | 固定为 `none` |
+| `requirement` | 指向本目录下的 requirement.md |
 
-| `autonomy` | 在 `docs/work/registry.md` 中设置（非 frontmatter）。默认值：standalone → `implement`；sub → `implement`。AI 不可升级。含义见 `docs/baseline/context/ai-autonomy-policy.md` §自治级别 |
+| `autonomy` | 在 `docs/work/registry.md` 中设置（非 frontmatter）。默认值：`implement`。AI 不可升级。含义见 `docs/baseline/context/ai-autonomy-policy.md` §自治级别 |
 
 ---
 
@@ -37,23 +38,14 @@ blocker: none                  # 阻塞原因，无则写 none
 branch: <分支名>
 status: planned
 type: standalone
+parent: none
 requirement: requirement.md
 created: <日期>
 updated: <日期>
 blocker: none
 ---
 
-# [工作标识] 计划
-
-## 项目章程
-
-<!-- 多阶段实施时必填，单阶段可选 -->
-
-- **北极星**：[最终目标]
-- **完成定义**：[什么算彻底完事]
-- **安全硬约束**：[不可逆/破坏性操作的边界，无则写"无"]
-- **范围分层**：[Tier 1 → 阶段 X / Tier 2 → 阶段 Y]
-- **明确不在范围**：[战略不做的事]
+# [计划标识] 计划
 
 ## 当前基线
 
@@ -61,7 +53,7 @@ blocker: none
 
 ## 阶段 N：[阶段名]
 
-- **状态**：planned
+- **状态**：planned。进入阶段→`in-progress`，完成→`completed`。同时同步 registry "当前激活"。
 - **依赖**：[前置阶段或条件，无则写"无"]
 - **目标**：[本阶段做什么]
 - **非目标**：[本阶段不做什么]
@@ -69,8 +61,8 @@ blocker: none
 - **公共契约**：[必须保持兼容的接口，不适用写"无"]
 - **闭环关卡**：
   - [ ] [具体可验证的条件]
+  - [ ] [具体可验证的条件]
 - **验证证据**：[截图/日志/测试输出/手动确认]
-- **恢复指引**：[接手代理先读什么，当前进度在哪]
 
 ## 测试矩阵
 
@@ -94,6 +86,17 @@ blocker: none
 - [ ] 每个声明的阶段均有闭环关卡定义
 - [ ] Skill 已标注或标记 none
 - [ ] 若 `research` 阶段触发，调研引用已链接
+
+---
+
+## 断点恢复规则
+
+中断后恢复时 AI 必须执行：
+
+1. 读 `docs/work/registry.md` "当前激活"，定位计划目录
+2. 读 plan.md，找第一个 `status: in-progress` 的阶段
+3. 找该阶段第一个未勾 checkbox，从该子任务开始执行
+4. 阶段全部 checkbox 已勾 → 状态改为 `completed`，同步 registry
 
 ---
 

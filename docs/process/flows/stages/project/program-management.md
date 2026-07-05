@@ -9,7 +9,7 @@ scope=多计划时，由 project 阶段触发。定义总计划/子计划的文�
 - [scope/README.md](../scope/README.md) §级别条件 — 多计划判定条件
 - [project/README.md](README.md) — 项目拆分入口与产出
 - [plan/template-master.md](../plan/template-master.md) — 总计划模板
-- [plan/template.md](../plan/template.md) — 子计划使用的单计划模板
+- [plan/template-sub.md](../plan/template-sub.md) — 子计划模板
 
 ## 文件结构
 
@@ -21,7 +21,7 @@ docs/work/
 │   ├── plan.md                  ← template-master.md
 │   ├── requirement.md           ← 总需求
 │   ├── <子计划1>/
-│   │   ├── plan.md              ← template.md
+│   │   ├── plan.md              ← template-sub.md
 │   │   └── requirement.md       ← 编排循环激活时从总需求提取
 │   └── <子计划2>/
 │       ├── plan.md

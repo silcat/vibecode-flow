@@ -51,6 +51,6 @@ chat-agent — 企业级 AI 聊天 agent（对话 + RAG + MCP）[completed] [imp
 | 类型 | `type` | `standalone` → 独立计划；`sub` → 子计划。`master` → 总计划，见 `docs/process/flows/stages/plan/template-master.md` |
 | 父计划 | `parent` | 子计划从 `parent` 提取父目录名；其他 → `—` |
 | 状态 | `status` | 直接同步。取值：`planned` / `in-progress` / `paused` / `blocked` / `completed` |
-| 自治 | 手动设置 | 唯一控制点。取值：`implement` / `plan-first` / `ask-first` / `research-only` / `blocked`。默认值见 `docs/process/flows/stages/plan/template.md`。含义见 `docs/baseline/context/ai-autonomy-policy.md` |
+| 自治 | 手动设置 | 唯一控制点。取值：`implement` / `plan-first` / `ask-first` / `research-only` / `blocked`。默认值：`implement`。含义见 `docs/baseline/context/ai-autonomy-policy.md` |
 | 阶段 | — | 当前实施的阶段名（如 `阶段 2`），无则 `—` |
 | 更新 | `updated` | 直接同步 |
