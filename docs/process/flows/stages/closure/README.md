@@ -45,4 +45,4 @@
 
 ## 回退
 
-关卡未过 → implement
+关卡未过 → 将失败关卡对应的阶段从 `completed` 回退为 `in-progress`，同步 registry，然后退回 implement

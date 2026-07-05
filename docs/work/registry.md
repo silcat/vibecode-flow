@@ -40,8 +40,7 @@ chat-agent — 企业级 AI 聊天 agent（对话 + RAG + MCP）[completed] [imp
 
 ### 恢复
 
-- 人类说"继续" → AI 查"当前激活"确定要恢复的计划。若该行为子计划，同时读取主计划了解上下文
-- 人类说关键词 → AI 搜"全部未完成"表找到对应目录
+- 人类说"继续" / 关键词 → AI 按 `docs/process/flows/stages/plan/recovery.md` 执行恢复
 
 ### 字段来源
 

@@ -14,6 +14,7 @@
 | 单计划 | [template-standalone.md](template-standalone.md) |
 | 多计划（总计划） | 由 [project 阶段](../project/README.md) 使用 [template-master.md](template-master.md) 产出 |
 | 多计划（子计划） | [template-sub.md](template-sub.md) |
+| 中断恢复 | [recovery.md](recovery.md) |
 
 ## 执行
 

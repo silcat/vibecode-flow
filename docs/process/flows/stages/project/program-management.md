@@ -98,8 +98,9 @@ docs/work/
 
 ### 中断恢复
 
-- registry "当前激活"为子计划 → 读取 autonomy 级别，继续该子计划当前阶段
-- 无当前激活 → 从编排循环步骤 1 重新扫描
+中断恢复统一见 [plan/recovery.md](../plan/recovery.md)。多计划特有规则：
+- 子计划恢复后完成 → 按 [plan/template-sub.md](../plan/template-sub.md) §多计划状态联动规则 联动
+- 编排循环中断 → 从 §编排循环 步骤 1 重新扫描
 
 ## 阻塞处理
 
