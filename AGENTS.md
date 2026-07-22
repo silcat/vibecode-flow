@@ -2,7 +2,7 @@
 
 ## 项目意图
 
-vibecode-flow-init 使用轻量级的吸引子引导工程（Attractor-Guided Engineering）工作流进行 AI 辅助的后端微服务系统开发。
+<项目名称> 使用轻量级的吸引子引导工程（Attractor-Guided Engineering）工作流进行 AI 辅助的后端微服务系统开发。
 
 本仓库面向后端微服务系统，不是框架核心项目。
 

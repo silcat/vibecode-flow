@@ -2,7 +2,7 @@
 
 ## 用途
 
-定义 vibecode-flow-init 的主要代码所有权边界。
+定义 `<项目名称>` 的主要代码所有权边界。
 
 当设计争议反复出现且取决于模块归属时，答案写在这里，不要在聊天中重复辩论。
 
@@ -20,31 +20,42 @@
 
 ## 1. 模块/服务清单
 
+<!-- 微服务：每行一个服务 -->
+<!-- 单体：每行一个顶层模块/package -->
 | 模块/服务 | 端口 | 职责范围 | 自有核心数据 | 所有者文档（本服务特有约束） | 保护级别 |
 |-----------|------|----------|--------------|------------------------------|----------|
-| chat-agent | 8090 | AI 聊天 agent（对话+RAG+MCP） | 对话历史、文档向量索引 | chat-agent/AGENTS.md | implement |
-
+| `<name>` | `<port>` | `<一句话职责>` | `<表名或数据域>` | `<服务>/AGENTS.md` | `<ask-first / plan-first / implement>` |
+| `<name>` | `<port>` | `<一句话职责>` | `<表名或数据域>` | `<服务>/AGENTS.md` | `<ask-first / plan-first / implement>` |
 ---
 
 ## 2. 依赖方向
 
+<!-- 单体：模块间 import 方向，不允许循环依赖 -->
+<!-- 微服务：服务间调用方向 / MQ 发布-订阅方向 -->
+
 ### 内部依赖
 
-chat-agent（独立项目，暂不涉及跨服务调用）
+<!-- 用 ASCII 图或方向列表画出拓扑 -->
+
+```
+<画依赖拓扑>
+```
 
 ### 依赖规则
 
-- chat-agent 内部：Controller → Service → LlmProvider / VectorStore / EmbeddingService
-- Controller 禁止直接调用 LlmProvider / VectorStore
+- <只允许的方向>
+- <不允许的方向>
 
 ---
 
 ## 3. 数据所有权
 
+<!-- 单体：哪个 module/package 是某张表的唯一写入口 -->
+<!-- 微服务：哪个服务拥有数据库 schema -->
+
 | 数据域           | 所有者        | 读写规则                           |
 | ---------------- | ------------- | ---------------------------------- |
-| 对话历史         | chat-agent（session 包） | 仅 SessionService 读写 |
-| 文档向量索引     | chat-agent（knowledge 包） | 仅 DocumentService 读写 |
+| <表名/数据域>    | <模块/服务名>  | <仅所有者可写；其他模块只读/不接触>  |
 
 ---
 

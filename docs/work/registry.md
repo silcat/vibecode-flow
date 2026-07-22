@@ -4,16 +4,12 @@
 
 ## 当前激活
 
-chat-agent — 企业级 AI 聊天 agent（对话 + RAG + MCP）[completed] [implement]
+_暂无_
 
 ## 全部计划
 
-| 计划 | 类型 | 父计划 | 状态 | 自治 | 阶段 | 更新 |
-|------|------|--------|------|------|------|------|
-| chat-agent | 总计划 | — | completed | ask-first | — | 2026-07-05 |
-| 　├ chat-core | 子计划 | chat-agent | completed | implement | — | 2026-07-05 |
-| 　├ knowledge-base | 子计划 | chat-agent | completed | implement | — | 2026-07-05 |
-| 　└ mcp-tools | 子计划 | chat-agent | completed | implement | — | 2026-07-05 |
+| 计划目录 | 类型 | 分支 | 状态 | 自治 | 更新 |
+|---------|------|------|--------|------|------|
 
 ---
 
