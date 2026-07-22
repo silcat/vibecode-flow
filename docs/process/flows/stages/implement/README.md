@@ -47,9 +47,27 @@
 
 代码变更 + 验证输出 + code-quality-audit 结果。
 
+## 退出门禁（阻断）
+
+阶段退出前必须逐项通过以下检查，**全部打勾后才允许标记阶段完成或退出至 closure**：
+
+- [ ] 已执行 `docs/baseline/context/project-context.md` 中与本阶段相关的全部验证命令，输出已捕获
+- [ ] 已加载 `docs/skills/engineering/verification-checklist/SKILL.md` 并逐条打勾通过
+- [ ] 已使用 `docs/skills/audit/code-quality-audit-prompt.md` 审计本次变更文件，P0/P1 发现已清零
+- [ ] plan.md 中本阶段的每个闭环关卡均有运行时验证证据（日志/截图/测试输出），不得仅以编译通过为据
+- [ ] 验证证据已写入 plan.md 对应阶段的"验证证据"段
+
+任一未通过 → 留在 implement，不得退出。不得以"稍后补"、"需外部环境"、"需 API Key"为由跳过验证打勾。
+
+若因外部依赖（如 API Key 未配置）确实无法完成运行时验证：
+1. 未通过的关卡在 plan.md 中保留 `[ ]` 状态
+2. 将阶段状态标记为 `blocked`（非 `completed`）
+3. 在 blocker 字段写明缺失条件
+4. 阶段不得标记为 completed 直到 blocker 解除且验证通过
+
 ## 退出
 
-有计划 → closure；无计划（轻量路径）→ log
+有计划 → closure（须先通过退出门禁）；无计划（轻量路径）→ log
 
 ## 回退
 
