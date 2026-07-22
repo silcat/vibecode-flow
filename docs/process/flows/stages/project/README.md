@@ -2,28 +2,33 @@
 
 ## 文件角色
 
-以 `type: master` 产出总计划与子计划目录骨架，作为编排契约。进入条件：scope=多计划。
+scope=多计划时，产出总计划与子计划目录骨架，作为编排契约。
 
-## 首先阅读
+## 进入条件
 
-| 如果你需要… | 先读 |
-|-------------|------|
-| 总计划模板与退出标准 | [plan/template-master.md](../plan/template-master.md) |
-| 子计划编排与生命周期规则 | [program-management.md](program-management.md) |
+scope-analysis.md 判定 = 多计划。
 
-## 执行
+## 执行步骤
 
-按 [plan/template-master.md](../plan/template-master.md) 产出总计划，按 [program-management.md](program-management.md) 创建子计划目录骨架（嵌套在总计划目录内）。
+1. 按 `template-master.md` 产出总计划 `docs/work/<项目>/plan.md`（type: master）
+2. 按 `program-management.md` 创建子计划目录骨架 `docs/work/<项目>/<子计划>/`
 
-## 产出
+总计划必含：项目章程、子计划清单、依赖图、集成关卡。
 
-- `docs/work/<项目目录>/plan.md`（`type: master`）
-- `docs/work/<项目目录>/<子计划目录>/` — 子计划目录骨架
+## 产出物
 
-## 退出
+| 产出 | 路径 |
+|------|------|
+| 总计划 | `docs/work/<项目>/plan.md`（type: master） |
+| 子计划骨架 | `docs/work/<项目>/<子计划>/` |
 
-→ plan-audit（`type: master`），通过后进入编排循环。
+## 完成证明
 
-## 回退
+`Test-Path` 确认总计划 plan.md 存在 + 子计划目录已创建。
 
-拆分缺陷 → 调整子计划清单、依赖图或重新 scope 判定
+## 退出路由
+
+| 条件 | 去向 |
+|------|------|
+| 完成 | → plan-audit（type: master） |
+| 拆分缺陷 | → project（调整清单/依赖图）或 → scope（重新判定） |

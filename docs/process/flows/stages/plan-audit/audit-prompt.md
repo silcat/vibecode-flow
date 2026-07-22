@@ -20,17 +20,6 @@
 
 ---
 
-## 上下文
-
-基于已加载的上下文。仅当以下内容尚未加载时补充读取：
-
-- 活跃计划文件（`docs/work/<目录>/plan.md`）
-- `docs/baseline/context/ai-autonomy-policy.md`
-- `docs/baseline/context/project-context.md`
-- 总计划（仅子计划审计时）：总计划的 `plan.md`
-
----
-
 ## 总计划审计
 
 将总计划作为**编排契约**审计。
@@ -129,7 +118,10 @@ FAIL: 需要修改
 
 | 审计 | 文件 | 关注点 | 时机 |
 |------|------|--------|------|
-| 需求与基线审计 | `stages/audit/audit-prompt.md` | 需求→基线的完整性和正确性 | 计划前 |
+| 需求审计 | [requirement-audit/audit-prompt.md](../requirement-audit/audit-prompt.md) | 需求→基线的完整性和正确性 | 计划前 |
 | 计划审计 | 本文件 | 计划作为契约的可行性和合理性 | 计划产出后 |
-| 闭环审计 | `stages/closure/audit-prompt.md` | 实施是否匹配计划和需求 | 实施完成后 |
-| 集成审计 | `program-management.md` §集成审计 | 跨子计划的端到端行为 | 全部子计划完成后 |
+| 闭环审计 | [closure/audit-prompt.md](../closure/audit-prompt.md) | 实施是否匹配计划和需求 | 实施完成后 |
+| 集成审计 | [program-management.md](../project/program-management.md) §集成审计 | 跨子计划的端到端行为 | 全部子计划完成后 |
+
+
+

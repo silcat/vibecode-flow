@@ -4,40 +4,44 @@
 
 对照需求文档，将本次变更固化到架构边界、技术标准与项目上下文中。
 
-## 首先阅读
+## 进入条件
 
-| 如果你需要… | 先读 |
-|-------------|------|
-| 了解当前架构边界与系统基线 | `docs/baseline/architecture/` |
-| 了解当前技术标准（api、database、auth 等） | `docs/baseline/standards/` |
-| 了解当前项目上下文 | `docs/baseline/context/project-context.md` |
+research.md 已生成（若触发 research）；requirement.md 存在。
 
-## 前置（阻断）
+## 执行步骤
 
-基线更新前，必须输出"基线影响分析"。全部打勾后才允许修改基线文件：
+### 1. 影响分析
 
-- [ ] 已列出本次需求变更涉及的所有模块/服务名称（对照 requirement 逐条提取）
-- [ ] 已逐条判定：新增服务(Y/N)、职责变更(Y/N)、新技术引入(Y/N)、端口变更(Y/N)
-- [ ] 已输出"影响矩阵"：每条变更 → 对应基线文件 → 更新内容摘要
-- [ ] 影响矩阵经人类确认后，才执行文件写入
+对照 requirement 逐条提取，在对话中输出影响矩阵：
 
-缺失任一条 → 保持阻塞，不得修改基线文件。
+| 变更项 | 新增服务 | 职责变更 | 新技术 | 端口变更 |
+|--------|---------|---------|--------|---------|
+| [变更描述] | Y/N | Y/N | Y/N | Y/N |
 
-> 若 autonomy = implement：本阻断自动跳过（保护区操作除外）。AI 仍需产出影响矩阵并执行基线更新。见 `docs/baseline/context/ai-autonomy-policy.md` §implement 全自动模式。
+### 2. 写入基线
 
-## 执行
-
-对照需求文档和影响矩阵，更新以下基线文件：
-- `docs/baseline/architecture/`（模块边界、系统基线）
-- `docs/baseline/standards/`（api、database、auth 等）
+对照影响矩阵，更新：
+- `docs/baseline/architecture/` — 模块边界、系统基线
+- `docs/baseline/standards/` — api、database、auth 等
 - `docs/baseline/context/project-context.md`
 
-更新后自检：对照 requirement 逐条确认基线描述与需求一致。发现矛盾先修正再退出。
+更新后自检：对照 requirement 逐条确认基线描述与需求一致。
 
-## 产出
+## 产出物
 
-`docs/baseline/` 下受影响的文件（architecture/、standards/、context/project-context.md）。
+| 产出 | 路径 |
+|------|------|
+| 更新的基线文件 | `docs/baseline/` 下受影响文件 |
 
-## 退出
+## 完成证明
 
-→ audit
+`git diff --stat docs/baseline/` 确认基线文件已更新，且变更与影响矩阵一致。
+
+> 若 autonomy ≠ implement：影响矩阵须人类确认后才执行文件写入。
+
+## 退出路由
+
+| 条件 | 去向 |
+|------|------|
+| 完成 | → requirement-audit |
+

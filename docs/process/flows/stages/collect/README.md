@@ -4,27 +4,33 @@
 
 收集用户输入和外部材料，为后续阶段准备原始上下文。
 
-## 首先阅读
+## 进入条件
 
-| 如果你需要… | 先读 |
-|-------------|------|
-| 了解讨论记录命名约定 | [clarify/template.md](../clarify/template.md) |
+无。
 
-## 执行
+## 执行步骤
 
-1. 提示用户为本次工作命名（如 `pet-homepage`），AI 据此创建 `docs/work/<branch>/`
-2. `docs/work/input/` 不存在则 AI 自动创建
+1. 提示用户为本次工作命名（如 `pet-homepage`），据此创建 `docs/work/<branch>/`
+2. `docs/work/input/` 不存在则自动创建
 3. 若 `docs/work/input/` 为空，提示用户是否需要放入外部材料（PM 笔记、原型截图等），用户确认后再继续
 4. 用户在聊天中描述需求 → 写入 `docs/work/<branch>/discussion.md`
 
-新鲜源来自两处：`docs/work/input/`（外部文件）和聊天。
-
 规则：保持原始材料接近原意，不在此阶段改写为完整需求。
 
-## 产出
+## 产出物
 
-`docs/work/<branch>/discussion.md`（若 `docs/work/input/` 有材料则一并就位）。
+| 产出 | 路径 |
+|------|------|
+| 讨论记录 | `docs/work/<branch>/discussion.md` |
+| 外部材料 | `docs/work/input/`（如有） |
 
-## 退出
+## 完成证明
 
-→ ② 或 ③
+`discussion.md` 存在且非空。直接在对话中确认路径即可，无需结构化标记。
+
+## 退出路由
+
+| 条件 | 去向 |
+|------|------|
+| 材料完整 | → requirement |
+| 材料模糊或矛盾 | → clarify |

@@ -6,31 +6,35 @@ scope=多计划时，由 project 阶段触发。定义总计划/子计划的文�
 
 ## 首先阅读
 
-- [scope/README.md](../scope/README.md) §级别条件 — 多计划判定条件
-- [project/README.md](README.md) — 项目拆分入口与产出
-- [plan/template-master.md](../plan/template-master.md) — 总计划模板
-- [plan/template-sub.md](../plan/template-sub.md) — 子计划模板
+- `scope/README.md` — 多计划判定条件
+- `project/README.md` — 项目拆分入口
+- `plan/template-master.md` — 总计划模板
+- `plan/template-sub.md` — 子计划模板
 
 ## 文件结构
 
 子计划嵌套在总计划目录内：
 
 ```
-docs/work/
-├── <项目目录>/
-│   ├── plan.md                  ← template-master.md
-│   ├── requirement.md           ← 总需求
-│   ├── <子计划1>/
-│   │   ├── plan.md              ← template-sub.md
-│   │   └── requirement.md       ← 编排循环激活时从总需求提取
-│   └── <子计划2>/
-│       ├── plan.md
-│       └── requirement.md
+docs/work/<项目>/
+├── scope-analysis.md           ← 范围判定
+├── requirement.md              ← 总需求
+├── requirement-audit.md        ← 需求审计
+├── plan.md                     ← template-master.md（type: master）
+├── plan-audit.md               ← 总计划审计
+├── <子计划1>/
+│   ├── plan.md                 ← template-sub.md
+│   ├── plan-audit.md           ← 子计划审计
+│   ├── implement-report.md     ← 实施报告
+│   ├── code-audit.md           ← 代码审计
+│   └── closure-audit.md        ← 闭环审计
+└── <子计划2>/
+    └── ...
 ```
 
 ## 总计划
 
-使用 [plan/template-master.md](../plan/template-master.md)。必含：项目章程、子计划清单、依赖图、集成关卡。
+按 `template-master.md` 产出。必含：项目章程、子计划清单、依赖图、集成关卡。
 
 ### 子计划清单格式
 
@@ -52,9 +56,7 @@ docs/work/
 
 状态取值见 `docs/work/registry.md` §字段来源。
 
-
-
-编排循环在每次子计划状态变更后，按以下规则更新总计划 frontmatter `status`。registry 的 `状态` 列随 frontmatter 自动同步（见 registry §字段来源）：
+编排循环在每次子计划状态变更后，按以下规则更新总计划 frontmatter `status`：
 
 - 全部 `planned` → `planned`
 - 任一 `in-progress` → `in-progress`
@@ -68,19 +70,21 @@ docs/work/
 
 ### 前置
 
-总计划已通过 `plan-audit`，frontmatter `status: planned`。
+总计划已通过 plan-audit，frontmatter `status: planned`。
 
 ### 子计划流程
 
-编排循环激活子计划时，AI 从总需求提取对应的验收标准子集生成 `requirement.md`，副本冻结。填充 `plan.md` 实施细节后，进入：
+编排循环激活子计划时，从总需求提取对应验收标准子集生成 `requirement.md`，然后执行：
 
-| 步骤 | 阶段 | 协议 |
+| 步骤 | 阶段 | 模块 |
 |------|------|------|
-| 1 | `plan-audit` | [计划审计](../plan-audit/README.md) |
-| 2 | `implement` | [实施与验证](../implement/README.md) |
-| 3 | `closure` | [闭环审计](../closure/README.md) |
+| 1 | plan | 填充 `template-sub.md` |
+| 2 | plan-audit | [计划审计](../plan-audit/README.md) |
+| 3 | implement | [实施与验证](../implement/README.md) |
+| 4 | code-audit | [代码审计](../code-audit/README.md) |
+| 5 | closure | [闭环审计](../closure/README.md) |
 
-跳过 `audit`（总计划已通过需求与基线审计）、`plan`（骨架已建，仅填充）、`log`（合并到项目完结日志）。
+跳过的阶段：requirement-audit（总计划已通过）、scope（已判定为多计划）、log（合并到项目完结日志）、skill（合并）。
 
 ### 编排循环
 
@@ -88,19 +92,14 @@ docs/work/
 
 1. 扫描子计划清单，读取各子计划 frontmatter `status`
 2. 按依赖图筛出依赖已全部 `completed` 的子计划
-3. 取清单声明顺序第一个可激活的子计划，激活并执行：
-   - frontmatter `status` → `in-progress`
-   - registry 新增行（类型 子计划，状态 in-progress）
-   - 执行子计划流程
-4. 子计划完成（closure 通过，registry 状态改为 `completed`）→ 回到 1
+3. 取清单声明顺序第一个可激活的子计划，激活并执行子计划流程
+4. 子计划完成（closure 通过）→ 回到 1
 5. 全部 `completed` → 集成审计
 6. 无可激活子计划但存在未完成 → 检查 `blocked`：有则报告等人类决策；无则回到 1 等待依赖满足
 
 ### 中断恢复
 
-中断恢复统一见 [plan/recovery.md](../plan/recovery.md)。多计划特有规则：
-- 子计划恢复后完成 → 按 [plan/template-sub.md](../plan/template-sub.md) §多计划状态联动规则 联动
-- 编排循环中断 → 从 §编排循环 步骤 1 重新扫描
+见 `plan/recovery.md`。多计划特有：编排循环中断 → 从步骤 1 重新扫描。
 
 ## 阻塞处理
 
@@ -119,25 +118,6 @@ docs/work/
 ## 项目完结
 
 集成审计通过后：
-1. 追加项目完结日志（见 [log/README.md](../log/README.md) §项目完结条目）
+1. 追加项目完结日志（见 `log/README.md` §项目完结条目）
 2. 总计划 frontmatter `status` → `completed`
 3. 子计划 registry 状态改为 `completed`；总计划目录保留为归档
-
-## 属于这里的
-
-- 文件结构、总计划定义、子计划编排
-- 两层调度、编排循环、状态派生
-- 集成审计和项目完结
-
-## 不属于这里的
-
-- 多计划判定条件 → [scope/README.md](../scope/README.md)
-- 项目拆分入口与产出 → [project/README.md](README.md)
-- 总计划/单计划模板和退出标准 → [plan/](../plan/)
-- 各阶段执行细节 → [stages/](../../)
-
-## 更新原则
-
-- 修改编排循环 → 检查 `implement`/`closure` 阶段 README 的项目分支是否受影响
-- 修改状态派生 → 检查 `registry.md` §字段来源 映射
-- 新增流程阶段 → 评估是否需项目级别差异并更新"子计划流程"

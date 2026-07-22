@@ -21,27 +21,27 @@
 | 如果你想…… | 首先阅读 | 然后阅读 |
 |-----------|---------|---------|
 | 理解强制性的 AI 上下文和当前项目状态 | `docs/baseline/context/project-context.md` | `docs/baseline/context/codebase-map.md`、`docs/baseline/context/conventions.md` |
-| 理解轻量级默认开发工作流 | `docs/process/guides/application-development-workflow.md` | `AGENTS.md` |
+| 理解轻量级默认开发工作流 | `docs/process/flows/main.md` | `AGENTS.md` |
 | 选择下一个 AI 就绪的工作项 | `docs/work/` | `docs/baseline/context/project-context.md`（自治策略）、活跃需求 |
 | 阅读原始材料或输入 | `docs/work/` | `docs/work/` 中的活跃文件 |
 | 阅读解释性方法论文章 | `docs/reference/articles/README.md` | `docs/reference/articles/` 下的相关文章 |
 | 澄清模糊需求 | `docs/work/<branch>/discussion.md` | `docs/process/flows/stages/requirement/README.md` |
 | 进行技术选型调研 | `docs/process/flows/stages/research/evaluation-framework.md` | `docs/work/<branch>/research.md` |
 | 查找某个第三方库的使用指南 | `docs/skills/tech/` | 对应 `tech-{技术名}/SKILL.md`
-| 在编码前路由任务（含前置路由） | `AGENTS.md`、`docs/process/protocols/process/routing.md` | `docs/skills/README.md`、`docs/process/00-plan-authoring-and-execution-guide.md` |
+| 在编码前路由任务（含前置路由） | `AGENTS.md`、`docs/process/routing.md` | `docs/skills/README.md`、`docs/process/flows/stages/plan/README.md` |
 | | 判断某个已有技能是否适用 | `docs/skills/index.md` | 对应 `SKILL.md`
-| 理解项目目标和系统定位 | `docs/baseline/architecture/project-vision.md` | `docs/baseline/architecture/system-baseline.md` |
+| 理解项目目标和系统定位 | `docs/baseline/architecture/system-baseline.md` | `docs/baseline/architecture/system-baseline.md` |
 | 理解当前技术基线 | `docs/baseline/architecture/system-baseline.md` | `docs/baseline/architecture/module-boundaries.md` |
 | 理解跨模块的端到端业务流程 | `docs/baseline/architecture/business-flows.md` | 相关服务的 `docs/flows/` 流程文件 |
 | 理解 API 契约和服务间关系 | `docs/baseline/architecture/module-boundaries.md` | `docs/baseline/standards/api.md` |
-| 理解角色与权限模型 | `docs/baseline/architecture/roles-and-permissions.md` | `docs/baseline/standards/auth.md` |
+| 理解角色与权限模型 | `docs/baseline/standards/auth.md` | `docs/baseline/standards/auth.md` |
 | 理解所有者文档优先级和真源边界 | `docs/baseline/context/conventions.md` | 相关所有者文档 |
-| 开始或审查非平凡实施 | `AGENTS.md` | `docs/skills/README.md`、`docs/process/00-plan-authoring-and-execution-guide.md`、活跃计划及 `docs/process/00-audit-execution-guide.md` |
-| 审查审计工作流或必需的审计 | `docs/process/00-audit-execution-guide.md` | `docs/skills/` 中的相关提示词 |
+| 开始或审查非平凡实施 | `AGENTS.md` | `docs/skills/README.md`、`docs/process/flows/stages/plan/README.md`、活跃计划及 `docs/process/flows/stages/requirement-audit/README.md` |
+| 审查审计工作流或必需的审计 | `docs/process/flows/stages/requirement-audit/README.md` | `docs/skills/` 中的相关提示词 |
 | 理解哪些文档应使用日期文件名而非固定名 | `docs/reference/guides/document-naming-and-timeliness.md` | 目标目录中的相关指南 |
-| 复制现成的日期文档骨架 | `docs/examples/README.md` | 重命名最接近的 `.example.md` 文件 |
+| 复制现成的日期文档骨架 | `docs/reference/guides/implementation-guide.md` | 重命名最接近的 `.example.md` 文件 |
 | 检查变更后必须更新哪些文档 | `docs/reference/guides/maintenance-checklist.md` | `docs/baseline/architecture/` 中最相关的文件 |
-| 查看最近的实施历史 | `docs/logs/index.md` | 最新的带日期日志文件 |
+| 查看最近的实施历史 | `docs/logs/00-log-writing-guide.md` | 最新的带日期日志文件 |
 | 查找过去的微妙回归 | `docs/bugs/00-bug-fix-note-writing-guide.md` | `docs/bugs/` 中的相关文件 |
 | 记录或审查探索性/手动测试 | `docs/work/` | 相关的带日期测试记录 |
 | 检查最新的已知良好验证状态 | `docs/logs/` | 最新的带日期测试或日志记录 |
@@ -52,7 +52,7 @@
 
 ## 推荐的默认路径
 
-所有请求首先经过前置路由（详见 `docs/process/protocols/process/routing.md`），区分琐碎修复、纯问题、Bug、审计或主流程。进入主流程后：
+所有请求首先经过前置路由（详见 `docs/process/routing.md`），区分琐碎修复、纯问题、Bug、审计或主流程。进入主流程后：
 
 1. `docs/baseline/context/`
 2. 进入 `docs/work/<branch>/` 工作目录
@@ -70,7 +70,7 @@
 | 如果任务是…… | 首先阅读 | 然后决定 |
 |-------------|---------|---------|
 | 不清晰的需求 | `docs/process/flows/stages/requirement/README.md` | 首先需要需求文件还是讨论文件 |
-| 非平凡实施 | `AGENTS.md` | 每个阶段或条目需要哪些技能，然后使用 `docs/process/00-plan-authoring-and-execution-guide.md` |
+| 非平凡实施 | `AGENTS.md` | 每个阶段或条目需要哪些技能，然后使用 `docs/process/flows/stages/plan/README.md` |
 | 文档、计划或闭环验证 | `docs/skills/README.md` | 适用哪个审计提示词或审查技能 |
 | 重复的已知方法或审查模式 | 相关所有者文档 | 已有技能是否适用，还是应创建新技能 |
 
@@ -109,6 +109,7 @@
 - 稳定的所有者文档使用固定名称
 - 有时效性的记录通常应包含日期
 - 参见 `docs/reference/guides/document-naming-and-timeliness.md`
+
 
 
 

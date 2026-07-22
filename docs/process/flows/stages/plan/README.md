@@ -2,47 +2,54 @@
 
 ## 文件角色
 
-根据 `scope` 级别产出计划文件，作为实施契约。
+根据 scope 级别产出计划文件，作为实施契约。
 
 - scope=单计划 → 产出 1 个 standalone 计划
-- scope=多计划 → 由 project 阶段创建总计划 + 子计划目录骨架，本阶段仅负责填充子计划细节
+- scope=多计划 → 总计划由 project 阶段产出，本阶段负责填充子计划细节
 
-## 首先阅读
+## 进入条件
 
-| scope | 模板 |
+| scope | 前提 |
 |-------|------|
-| 单计划 | [template-standalone.md](template-standalone.md) |
-| 多计划（总计划） | 由 [project 阶段](../project/README.md) 使用 [template-master.md](template-master.md) 产出 |
-| 多计划（子计划） | [template-sub.md](template-sub.md) |
-| 中断恢复 | [recovery.md](recovery.md) |
+| 单计划 | requirement-audit 已通过 |
+| 子计划 | project 阶段已产出总计划 + 编排循环已激活 |
 
-## 执行
+research.md 存在（若触发）。
 
-### scope=单计划
+## 执行步骤
 
-根据 requirement.md 和 audit 发现，按 [template-standalone.md](template-standalone.md) 填写。
+### 单计划
 
-### scope=多计划
+根据 requirement.md + scope-analysis.md + research.md（若触发），按 `template-standalone.md` 填写。产出 `docs/work/<目录>/plan.md`。
+
+### 多计划（子计划）
 
 总计划已由 project 阶段产出。编排循环激活子计划时：
-1. AI 从总需求提取对应验收标准子集生成 `requirement.md`
-2. 按 [template-sub.md](template-sub.md) 填充实施细节（含前置检查 + parent 字段）
+1. 从总需求提取对应验收标准子集生成 `requirement.md`
+2. 按 `template-sub.md` 填充实施细节（含前置检查 + parent 字段）
 
-## 产出
+产出 `docs/work/<总目录>/<子计划>/plan.md`。
 
-- 单计划：`docs/work/<目录>/plan.md`
-- 多计划：总计划由 project 阶段产出；子计划 `docs/work/<总目录>/<子计划>/plan.md`
+### 中断恢复
 
-## 退出
+见 `recovery.md`。
 
-→ plan-audit
+## 产出物
 
-## 回退
+| scope | 路径 |
+|-------|------|
+| 单计划 | `docs/work/<目录>/plan.md` |
+| 子计划 | `docs/work/<总目录>/<子计划>/plan.md` |
 
-计划不可执行 → audit 或 requirement
+## 完成证明
 
-## 多计划协调
+`Test-Path` 确认 plan.md 存在，frontmatter type/status/autonomy 合法。
 
-子计划间有依赖时，按依赖图顺序推进。允许无依赖的子计划并行。
+## 退出路由
 
-子计划完成时的状态联动：见 [template-sub.md](template-sub.md) 的"多计划状态联动规则"。
+| 条件 | 去向 |
+|------|------|
+| 完成 | → plan-audit |
+| 计划不可执行 | → requirement-audit 或 requirement |
+
+> 多计划协调：子计划间有依赖时按依赖图顺序推进，无依赖的可并行。状态联动见 `template-sub.md`。

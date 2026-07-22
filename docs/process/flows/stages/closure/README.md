@@ -2,47 +2,52 @@
 
 ## 文件角色
 
-独立复核实施是否匹配计划和需求，产出闭环审计发现。
+独立复核实施是否匹配计划和需求，产出闭环审计发现。实施者不得自审。
 
-## 首先阅读
+## 进入条件
 
-| 如果你需要… | 先读 |
-|-------------|------|
-| 执行闭环审计的具体步骤 | [audit-prompt.md](audit-prompt.md) |
+- implement-report.md 存在且裁决 PASS
+- code-audit.md 存在且裁决 PASS（P0/P1 清零）
+- plan.md 存在
 
-## 前置（阻断）
+## 执行步骤
 
-闭环审计前，必须逐项检查并更新以下文档。全部打勾后才允许进入审计：
+### 1. 读取上下文
 
-- [ ] 已对照实施计划逐阶段检查：所有阶段的闭环关卡均通过（附证据）
-- [ ] 已执行 plan.md 中声明的全部验证命令，捕获实际输出
-- [ ] 已输出"闭环证据链"：每条验收标准 → 对应测试/验证输出 → 通过/失败
-- [ ] `docs/baseline/context/codebase-map.md` — 入口点、变更路由、脆弱文件是否反映当前实际
-- [ ] `docs/baseline/architecture/module-internals.md` — 新增模块/包的内部结构是否已记录
-- [ ] `docs/baseline/architecture/module-boundaries.md` — 新增服务/职责变更是否已注册
-- [ ] `docs/baseline/context/project-context.md` — 新技术栈是否已注册
-- [ ] 审计输出文件 `docs/audits/YYYY-MM-DD-closure-audit.md` 已生成
+- plan.md — 闭环关卡清单
+- implement-report.md — 实施者自证记录
+- code-audit.md — 代码审查发现
 
-缺失任一条 → 先完成缺失项，再进入审计。不得以"稍后补"为由跳过。
+### 2. 闭环审计
 
-## 执行
+按 `audit-prompt.md` 执行：
 
-使用 [audit-prompt.md](audit-prompt.md) 独立复核。关卡未过即回退。
+- 活行为是否匹配需求
+- 闭环关卡是否真正满足（对照 implement-report 验证输出）
+- 证据是否在文件中，而非仅聊天中
+- 基线文档是否已更新
+- 验证失败是否被隐藏
 
-退出时：plan.md frontmatter `status` 改为 `completed`，从 registry.md 删除该行。
+### 3. 多计划
 
-## 项目级别
+子计划各自执行标准闭环审计。最后一个子计划闭环通过后触发集成审计（见 `program-management.md`）。
 
-若当前工作为多计划（子计划），见 [program-management.md](../project/program-management.md)。子计划各自执行标准闭环审计；最后一个子计划闭环通过后触发集成审计。
+## 产出物
 
-## 产出
+| 产出 | 路径 |
+|------|------|
+| 闭环审计报告 | `docs/work/<branch>/closure-audit.md` |
 
-`docs/audits/YYYY-MM-DD-closure-audit.md`
+## 完成证明
 
-## 退出
+`Test-Path` 确认 closure-audit.md 存在，裁决 PASS。PASS → plan.md status → completed，从 registry.md 删除。
 
-→ log
+## 退出路由
 
-## 回退
-
-关卡未过 → 将失败关卡对应的阶段从 `completed` 回退为 `in-progress`，同步 registry，然后退回 implement
+| 条件 | 去向 |
+|------|------|
+| PASS | → log |
+| FAIL + P0/P1 缺陷 | → code-audit |
+| FAIL + 验证证据缺失 | → implement |
+| FAIL + 闭环关卡不可验证 | → plan |
+| FAIL + 需求未覆盖 | → requirement |

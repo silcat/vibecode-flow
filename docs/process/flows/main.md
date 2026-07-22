@@ -19,8 +19,8 @@
 | 澄清模糊 | 材料不完整或矛盾 → 触发 | [clarify](stages/clarify/README.md) |
 | 合成需求 | 始终 | [requirement](stages/requirement/README.md) |
 | 范围判定 | 始终 | [scope](stages/scope/README.md) |
-| 技术调研 | 满足任一即触发：①项目无现有模块可参考 ②引入新外部依赖/平台 ③涉及未在 project-context.md 注册的技术 | [research](stages/research/README.md) |
-| 更新基线 | 变更系统基线 → 触发 | [baseline](stages/baseline/README.md) |
+| 技术调研 | scope-analysis.md 能力缺口非空 → 触发 | [research](stages/research/README.md) |
+| 更新基线 | scope-analysis.md 能力缺口非空 或 契约触碰非空 → 触发 | [baseline](stages/baseline/README.md) |
 
 跳过判定由本文件持有，阶段 README 不内置执行条件。
 
@@ -28,9 +28,9 @@
 
 | 级别 | 条件 | 追加序列 |
 |------|------|---------|
-| 轻量 | scope=轻量 | implement → log |
-| 单计划 | scope=单计划 | audit → plan → plan-audit → implement → closure → log → skill |
-| 多计划 | scope=多计划 | audit → project → plan-audit → [编排: plan-audit → implement → closure]×N → 集成审计 → log → skill |
+| 轻量 | scope-analysis.md 判定 = 轻量 | implement → code-audit → log |
+| 单计划 | scope-analysis.md 判定 = 单计划 | requirement-audit → plan → plan-audit → implement → code-audit → closure → log → skill |
+| 多计划 | scope-analysis.md 判定 = 多计划 | requirement-audit → project → plan-audit（总计划）→ 编排循环（每个子计划: plan → plan-audit → implement → code-audit → closure）→ 集成审计 → log → skill |
 
 > scope=单计划 序列中的阶段不另设独立条件——scope 判为单计划已编码了它们的触发前提。唯一例外是 skill：错误模式 ≥2 次才触发，与 scope 无关。
 
@@ -38,11 +38,12 @@
 
 | 阶段 | 模块 |
 |------|------|
-| 需求与基线审计 | [audit](stages/audit/README.md) |
+| 需求审计 | [requirement-audit](stages/requirement-audit/README.md) |
 | 编写计划 | [plan](stages/plan/README.md) |
 | 项目拆分 | [project](stages/project/README.md) |
 | 计划审计 | [plan-audit](stages/plan-audit/README.md) |
 | 实施验证 | [implement](stages/implement/README.md) |
+| 代码审计 | [code-audit](stages/code-audit/README.md) |
 | 闭环审计 | [closure](stages/closure/README.md) |
 | 日志回顾 | [log](stages/log/README.md) |
 | 技能提取 | [skill](stages/skill/README.md) |
@@ -67,3 +68,8 @@
 - 新增 scope 级别 → scope 退出表增加一行；同步更新 [scope/README.md](stages/scope/README.md) 判定条件
 - 阶段跳过条件变更 → 仅修改本文件序列表，阶段 README 不动
 - 阶段顺序变更 → 检查 [program-management.md](stages/project/program-management.md) 子计划生命周期截断序列和 [closure/README.md](stages/closure/README.md) 项目分支引用是否仍一致
+
+
+
+
+

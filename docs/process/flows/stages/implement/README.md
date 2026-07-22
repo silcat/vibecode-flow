@@ -4,71 +4,114 @@
 
 按计划执行 TDD 实施并完成全量验证，产出通过全部测试的代码变更。
 
-## 首先阅读
+## 进入条件
 
-| 如果你需要… | 先读 |
-|-------------|------|
-| TDD 执行循环 | `docs/skills/engineering/tdd/SKILL.md` |
-| 验证检查清单 | `docs/skills/engineering/verification-checklist/SKILL.md` |
-| 代码质量审计提示词 | `docs/skills/audit/code-quality-audit-prompt.md` |
+编码前全部满足，否则回退到收集/澄清阶段补全：
 
-## 前置（阻断）
+| # | 条件 | 验证方式 |
+|---|------|---------|
+| 1 | 已读取 `docs/baseline/context/conventions.md` 路由表 | 对话中输出匹配的文件清单 |
+| 2 | 已逐条读取本次变更触发的全部 `standards/` 文件 | 同上 |
+| 3 | 已读取 `docs/skills/engineering/tdd/SKILL.md` | 同上 |
+| 4 | 已输出匹配摘要：文件名 + 触发场景 | 对话中可见 |
+| 5 | 工具链就绪 | `cd tools && pnpm check` 通过（文档锚点、乱码、超大文件检查） |
 
-编码前必须完成以下自检，全部打勾后才允许创建或修改代码文件：
+> 第 5 条：工具链不存在或未安装时输出警告并继续。此条不阻断。
 
-- [ ] 已读取 `docs/baseline/context/conventions.md` 路由表
-- [ ] 已匹配本次变更触发的全部 standards/ 文件，逐条读取
-- [ ] 已读取 `docs/skills/engineering/tdd/SKILL.md`
-- [ ] 已在对话中输出匹配摘要（文件名 + 触发场景）
+## 执行步骤
 
-缺失任一条 → 回退到收集/澄清阶段补全，不得进入实施。
+### 1. 注册与锚定
 
-## 执行
-
-- 有计划：将 plan.md frontmatter `status` 改为 `in-progress`，更新 registry.md（设为当前激活，状态 in-progress（取值见 `docs/work/registry.md` §字段来源））
+- 有计划：plan.md frontmatter `status` → `in-progress`，更新 `registry.md`
 - 无计划（轻量路径）：跳过注册表更新
 - 读取 plan.md（如有），锚定实施范围（触及面 + 公共契约 + 非目标）
-- 按 `docs/skills/engineering/tdd/SKILL.md` 执行 TDD 循环（RED → GREEN → REFACTOR）
-- 阶段出口：加载 `docs/skills/engineering/verification-checklist/SKILL.md` 逐条打勾
-- 阶段出口：使用 `docs/skills/audit/code-quality-audit-prompt.md` 审计本次变更文件，P0/P1 发现即阻断
-- 所有验证必须实际执行并捕获输出
 
-## 红线
+### 2. TDD 循环
 
-- 禁止从记忆或推理中声称结果
+按 `docs/skills/engineering/tdd/SKILL.md` 执行 RED → GREEN → REFACTOR。
+
+**红线**（违反即回退）：
+- 生产代码先于测试写出
+- 测试写完直接通过（从未 RED）
+- 禁止从记忆或推理声称结果
 - 占位符命令不等同于通过
-- 轻量路径也必须通过 code-quality-audit，P0 发现即阻断
 
-## 无测试框架
+每轮必须输出：
 
-首个切片 → 搭建测试基础设施。搭建完成前以运行时验证矩阵为最低标准。
+```
+::tdd-cycle::[N]
+  RED:  [测试名] → 失败原因正确 ✓
+  GREEN: [最小实现] → 测试通过 ✓
+  REFACTOR: [重构内容] → 全绿 ✓
+```
 
-## 产出
+### 3. 首次切片特殊处理
 
-代码变更 + 验证输出 + code-quality-audit 结果。
+无测试框架时，首个切片搭建测试基础设施。搭建完成前以运行时验证矩阵为最低标准。
 
-## 退出门禁（阻断）
+### 4. 验证
 
-阶段退出前必须逐项通过以下检查，**全部打勾后才允许标记阶段完成或退出至 closure**：
+- 执行 `docs/baseline/context/project-context.md` 中全部验证命令，实际运行并捕获输出
+- 加载 `docs/skills/engineering/verification-checklist/SKILL.md` 逐条执行
 
-- [ ] 已执行 `docs/baseline/context/project-context.md` 中与本阶段相关的全部验证命令，输出已捕获
-- [ ] 已加载 `docs/skills/engineering/verification-checklist/SKILL.md` 并逐条打勾通过
-- [ ] 已使用 `docs/skills/audit/code-quality-audit-prompt.md` 审计本次变更文件，P0/P1 发现已清零
-- [ ] plan.md 中本阶段的每个闭环关卡均有运行时验证证据（日志/截图/测试输出），不得仅以编译通过为据
-- [ ] 验证证据已写入 plan.md 对应阶段的"验证证据"段
+## 产出物
 
-任一未通过 → 留在 implement，不得退出。不得以"稍后补"、"需外部环境"、"需 API Key"为由跳过验证打勾。
+| 产出 | 验证 |
+|------|------|
+| 代码变更 | `git diff --stat` |
+| 测试代码 | 新增测试文件存在于 diff 中 |
+| 验证输出 | project-context.md 全部验证命令的实际输出 |
+| 实施报告 | `docs/work/<branch>/implement-report.md` |
 
-若因外部依赖（如 API Key 未配置）确实无法完成运行时验证：
-1. 未通过的关卡在 plan.md 中保留 `[ ]` 状态
-2. 将阶段状态标记为 `blocked`（非 `completed`）
-3. 在 blocker 字段写明缺失条件
-4. 阶段不得标记为 completed 直到 blocker 解除且验证通过
+## 完成证明
 
-## 退出
+阶段退出前，按执行顺序在对话中输出以下报告，同时写入 `docs/work/<branch>/implement-report.md`。缺任一段 → 阶段不完整，禁止退出。
 
-有计划 → closure（须先通过退出门禁）；无计划（轻量路径）→ log
+```
+::implement-report
 
-## 回退
+## 1. 前置检查
+[conventions.md 路由匹配结果：命中了哪些 standards/ 文件]
 
-设计缺陷 → baseline（轻量路径则先升档至单计划路径）。
+## 2. TDD 循环
+[每轮 ::tdd-cycle:: 的汇总]
+- 共 N 轮，全部 GREEN + REFACTOR 通过
+
+## 3. 工具链检查
+[cd tools && pnpm check 的实际输出]
+
+## 4. 项目验证命令
+[project-context.md 中每条验证命令的实际运行输出]
+
+## 5. 验证检查清单
+[verification-checklist/SKILL.md 逐条打勾结果，每条附命令输出摘要]
+
+## 6. 产出物
+| 路径 | 操作 |
+|------|------|
+| [文件1] | 新增/修改 |
+| ... | ... |
+
+## 7. 裁决
+PASS / FAIL
+
+::implement-report
+```
+
+报告双写：对话中输出 `::implement-report` 块（出口实时拦截），同时写入 `docs/work/<branch>/implement-report.md`（持久化，供 code-audit 和 closure 引用）。
+
+PASS → 进入 code-audit。
+
+FAIL → 留在 implement。不得以"稍后补"、"需外部环境"、"需 API Key"为由跳过任何段。
+
+若因外部依赖阻塞（如 API Key 未配置），在第 4 段中标注 `BLOCKED`，plan.md 状态改 `blocked`，阶段不标记 completed。
+
+## 退出路由
+
+| 条件 | 去向 |
+|------|------|
+| 通过 + 有计划 | → code-audit |
+| 通过 + 轻量路径 | → code-audit |
+| 失败 + 设计缺陷 | → baseline（轻量路径先升档至单计划路径） |
+| 失败 + 实施问题 | 留在 implement，修复后重走完成证明 |
+

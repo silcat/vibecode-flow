@@ -2,46 +2,43 @@
 
 ## 文件角色
 
-独立复核计划作为契约的可行性和合理性，按 type 分三路审计。
+独立复核计划作为契约的可行性和合理性，按 type 分三路审计。实施者不得自审。
 
-## 首先阅读
+## 进入条件
 
-- [audit-prompt.md](audit-prompt.md) — 计划审计具体步骤
+plan.md 存在，frontmatter type/status/autonomy 合法。
 
-## 执行
+## 执行步骤
 
-使用 [audit-prompt.md](audit-prompt.md) 独立复核计划。审计开始前读取计划 frontmatter `type`，audit-prompt.md 内按类型分三路审计。
+按 `audit-prompt.md` 执行。审计开始前读取 plan.md frontmatter `type` 决定审计模式：
 
-## 产出
+| type | 模式 |
+|------|------|
+| master | 总计划审计 |
+| standalone | 单计划审计 |
+| sub | 子计划审计（单计划审计 + 子计划增量） |
 
-`docs/audits/YYYY-MM-DD-plan-audit.md`
+## 产出物
 
-## 退出
+| 产出 | 路径 |
+|------|------|
+| 审计报告 | `docs/work/<项目>/plan-audit.md` 或 `docs/work/<项目>/<子计划>/plan-audit.md` |
 
-审计通过 → `standalone`/`sub` → implement；`master` → 编排循环
+## 完成证明
 
-## 回退
+`Test-Path` 确认 plan-audit.md 存在，裁决 PASS。
 
-审计未通过时，按计划类型差异化回退：
+## 退出路由
 
-| type | 阻塞来源 | 回退路径 |
-|------|---------|---------|
-| `master` | 拆分缺陷、依赖图、集成关卡 | → `project`：修改总计划（调整子计划清单/依赖图/集成关卡），已有子计划骨架若受影响则级联标记为需重对齐 |
-| `standalone` | 实施契约缺陷 | → `plan`：修改单计划后重审 |
-| `sub` | 实施契约缺陷（单计划自身问题） | → `project`：修改子计划后重审 |
-| `sub` | 范围对齐 / 并行冲突（根因在总计划分配） | → 标记总计划待调整，本子计划及受影响并行子计划暂停；总计划调整并重新通过 `plan-audit` 后再继续 |
-
-子计划审计中若同时存在自身问题和总计划根因，先处理总计划根因（防止改完子计划又被总计划变更覆盖）。
-## 前置（阻断）
-
-审计开始前，必须将计划声明同步到基线文件。全部打勾后才允许进入审计：
-
-- [ ] 计划声明新服务/端口 → 已同步到 `docs/baseline/architecture/module-boundaries.md`
-- [ ] 计划声明新包/分层结构 → 已同步到 `docs/baseline/architecture/module-internals.md`
-- [ ] 计划声明新技术/外部依赖 → 已同步到 `docs/baseline/context/project-context.md`
-- [ ] 计划声明技术栈变更 → 已同步到 `docs/baseline/architecture/system-baseline.md`
-
-缺失任一条 → 先同步基线，再进入审计。不得以"实施后补"为由跳过。
+| 条件 | 去向 |
+|------|------|
+| PASS + standalone/sub | → implement |
+| PASS + master | → 编排循环 |
+| FAIL + standalone | → plan（修改后重审） |
+| FAIL + sub | → project（修改子计划后重审） |
+| FAIL + master | → project（调整子计划清单/依赖图/集成关卡） |
 
 
-> 若 autonomy = implement：计划审计自动通过，直接进入 implement 阶段（保护区操作除外）。见 docs/baseline/context/ai-autonomy-policy.md §implement 全自动模式。
+
+
+

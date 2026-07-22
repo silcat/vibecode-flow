@@ -4,43 +4,32 @@
 
 追加每日开发日志，检测错误模式并触发技能提取，记录回归与回顾。
 
-## 首先阅读
+## 进入条件
 
-| 如果你需要… | 先读 |
-|-------------|------|
-| 每日日志编写指南 | `docs/logs/00-log-writing-guide.md` |
-| Bug 记录编写指南 | `docs/bugs/00-bug-fix-note-writing-guide.md` |
-| 回顾编写指南 | `docs/retro/00-retrospective-writing-guide.md` |
+closure 已通过（有计划路径）或 code-audit 已通过（轻量路径）。
 
-## 前置（阻断）
+## 执行步骤
 
-- [ ] 已搜索 `docs/logs/` 中错误/缺陷/回归/失败关键词的出现次数
-- [ ] 出现 ≥2 次的重复模式已列出并标注是否触发 skill 阶段
-- [ ] 本次变更涉及的任何非显而易见回归已写入 `docs/bugs/`
+1. 追加每日开发日志到 `docs/logs/YYYY/MM-DD.md`（倒序）
+2. 搜索 `docs/logs/` 中错误/缺陷/回归/失败关键词 ≥2 次 → 触发 skill 阶段
+3. 非显而易见回归 → 写入 `docs/bugs/`
+4. 原型与实施实质性偏离 → 写入 `docs/retro/`
 
-## 执行
+## 产出物
 
-- 追加每日开发日志到 `docs/logs/YYYY/MM-DD.md`（倒序）
-- 检查 `docs/logs/error-patterns.md` → ≥2 次重复模式 → 触发 skill 阶段
-- 非显而易见回归 → 记录到 `docs/bugs/`
-- 原型与实施实质性偏离 → 编写回顾到 `docs/retro/`
+| 产出 | 路径 |
+|------|------|
+| 开发日志 | `docs/logs/YYYY/MM-DD.md` |
+| Bug 记录 | `docs/bugs/`（如有） |
+| 回顾 | `docs/retro/`（如有） |
 
-## 项目完结条目
+## 完成证明
 
-总计划完结时（所有子计划 completed + 集成审计通过），在每日日志中追加：
+`Test-Path` 确认当日日志已追加，`rg` 确认本次变更日期条目存在。
 
-```markdown
-## 项目完结：<项目名>
+## 退出路由
 
-- 总计划：`docs/work/<项目目录>/plan.md`
-- 子计划清单：
-  | 子计划目录 | 完成时间 |
-  |-----------|---------|
-  | <子计划1> | YYYY-MM-DD |
-  | <子计划2> | YYYY-MM-DD |
-- 集成审计：通过 / 发现项及处理（如有）
-```
-
-## 退出
-
-→ 流程结束（→ skill，若 error-patterns ≥2 次）
+| 条件 | 去向 |
+|------|------|
+| 错误模式 <2 次 | 流程结束 |
+| 错误模式 ≥2 次 | → skill |
