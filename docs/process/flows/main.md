@@ -21,7 +21,7 @@
 | 摸底 | 始终 | [investigate](stages/investigate/README.md) |
 | 方案 | 始终 | [solution](stages/solution/README.md) |
 | 范围判定 | 始终 | [scope](stages/scope/README.md) |
-| 更新基线 | scope-analysis.md 判定 ≠ 轻量 → 触发 | [baseline](stages/baseline/README.md) |
+| 更新基线 | 始终    | [baseline](stages/baseline/README.md) |
 
 跳过判定由本文件持有，阶段 README 不内置执行条件。
 

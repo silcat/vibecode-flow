@@ -11,6 +11,9 @@ skills/
 ├── engineering/              ← 方法技能（怎么做事）
 │   ├── tdd/                  ← 测试驱动开发
 │   │   └── SKILL.md
+│   ├── sdd/                  ← 子代理驱动开发
+│   │   ├── SKILL.md
+│   │   └── implementer-prompt.md
 │   ├── glue-development/     ← 胶水开发实施规范
 │   │   └── SKILL.md
 │   ├── grill-with-docs/      ← 澄清模糊需求
@@ -58,6 +61,7 @@ skills/
 | 技能 | 何时使用 | 何时不使用 | 所需输入 | 预期输出 |
 |------|---------|-----------|---------|---------|
 | `tdd/SKILL.md` | 编写新功能或修 Bug，需要测试先行 | 测试存量充足，仅微调实现 | 需求 / Bug 描述、现有测试基座 | RED → GREEN → REFACTOR 循环完成的代码 + 测试 |
+| `sdd/SKILL.md` | 所有实施任务，按阶段独立 dispatch 子代理执行 TDD | 无（始终使用） | plan.md（阶段列表、闭环关卡）、上下文表 #1–#7 | .sdd/ 目录 + implement-report.md + 代码变更 |
 | `glue-development/SKILL.md` | 编写编排/调度/适配代码 | 需要从零实现核心领域逻辑 | 被编排服务的契约、流程定义 | 胶水代码 + 集成验证 |
 | `grill-with-docs/SKILL.md` | 进入阶段 ② 澄清模糊时 | 材料清晰、边界明确 | 源材料、已有基线文档、代码库 | 逐个追问记录 + 术语决议 + 讨论文件 |
 | `verification-checklist/SKILL.md` | 实施完成，准备退出阶段 ⑩ | 仍在 TDD 循环中 | 计划验收标准、变更文件列表 | 逐项打勾的验证报告 |

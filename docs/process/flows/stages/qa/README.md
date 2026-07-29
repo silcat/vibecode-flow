@@ -54,6 +54,7 @@ implement 完成后，独立执行完整验证闭环：行为验证、代码审�
 
 | Route | 去向 |
 |-------|------|
+| DONE | → process-management |
 | implement | → implement（TDD 修复） |
 | human | → 暂停，等待人类确认 |
 
