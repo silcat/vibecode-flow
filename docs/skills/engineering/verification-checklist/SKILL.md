@@ -19,8 +19,9 @@
 - [ ] 新增代码路径有对应测试覆盖
 
 ### API 与契约
-- [ ] API 响应状态码与关键字段与需求一致
-- [ ] 如有契约变更，已在对应文档（`docs/baseline/architecture/`）中反映
+
+> 已移至 qa 阶段（docs/process/flows/stages/qa/README.md）。
+implement 阶段不再直接验证端点行为。
 
 ### 数据库
 - [ ] 迁移脚本正向执行成功
@@ -32,8 +33,9 @@
 - [ ] 回归发现已分类处理（修复 / 记录到 `docs/bugs/` / 创建 followup 计划）
 
 ### 运行态
-- [ ] 应用启动无异常日志
-- [ ] 关键业务流程手动验证通过
+
+> 已移至 qa 阶段。
+implement 阶段不再启容器或做手动流程验证。
 
 ### 证据
 - [ ] 所有验证命令实际执行过，输出已捕获
@@ -52,6 +54,6 @@
 
 ## 关联
 
-- 闭环审计提示词：`docs/skills/audit/closure-audit-prompt.md`
+- 闭环审计提示词：qa 阶段闭环判定（见 qa-agent.toml）
 - 代码质量审计提示词：`docs/skills/audit/code-quality-audit-prompt.md`
 - 路由协议：`docs/process/protocols/routing.md` 阶段 ⑩

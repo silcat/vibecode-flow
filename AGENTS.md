@@ -1,4 +1,4 @@
-﻿# AGENTS.md
+# AGENTS.md
 
 ## 项目意图
 
@@ -31,8 +31,7 @@ AI 代理收到请求后，按以下前置路由执行：
 执行 docs/process/intent-detect.md：信号评分 → Tier 判定 → 自动跳过检查 → Tier 响应（静默路由 / 摘要确认 / 完整澄清）→ 路由选定。
 
 ### 步骤 3：路由
-意图检测产出路由后，按 [routing.md](docs/process/routing.md) 中的路由表参考进入对应流程文件。
-按 docs/process/routing.md 中的优先级路由表，进入对应流程文件。
+意图检测产出路由后，按 [routing.md](docs/process/routing.md) 中的路由表进入对应流程文件。
 
 ### 步骤 4：阶段出口
 
@@ -43,6 +42,8 @@ AI 代理收到请求后，按以下前置路由执行：
 - 需输出标记的 → 在对话中输出对应标记块，内容不为空
 
 缺任一 → 阶段不完整 → 禁止进入下一阶段。
+
+完成证明全部通过后，**必须等待人类确认才可进入下一阶段**。禁止自动推进。代理在阶段末尾输出完成摘要，人类回复确认后进入退出路由指定的下一阶段。
 
 
 ## 运营规则
@@ -72,7 +73,7 @@ AI 代理收到请求后，按以下前置路由执行：
 
 - 技能选择按工作方法匹配，非仅业务标签
 - 使用前确认 docs/skills/README.md 中列出的所需输入可用
-- 技术选型时使用 docs/skills/engineering/tech-evaluation/SKILL.md
+- 技术选型和方案对比时使用 docs/process/flows/stages/solution/README.md 中的 6 维度评估框架
 - 对于非平凡计划，记录 Skill: <名称> 或 Skill: none
 - 无匹配技能时按正常文档驱动工作流继续
 

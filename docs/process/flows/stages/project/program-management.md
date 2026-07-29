@@ -26,8 +26,7 @@ docs/work/<项目>/
 │   ├── plan.md                 ← template-sub.md
 │   ├── plan-audit.md           ← 子计划审计
 │   ├── implement-report.md     ← 实施报告
-│   ├── code-audit.md           ← 代码审计
-│   └── closure-audit.md        ← 闭环审计
+│   └── test-cases.md          ← 测试用例（qa 产出）
 └── <子计划2>/
     └── ...
 ```
@@ -81,8 +80,7 @@ docs/work/<项目>/
 | 1 | plan | 填充 `template-sub.md` |
 | 2 | plan-audit | [计划审计](../plan-audit/README.md) |
 | 3 | implement | [实施与验证](../implement/README.md) |
-| 4 | code-audit | [代码审计](../code-audit/README.md) |
-| 5 | closure | [闭环审计](../closure/README.md) |
+| 4 | qa | [验证与闭环](../qa/README.md) |
 
 跳过的阶段：requirement-audit（总计划已通过）、scope（已判定为多计划）、log（合并到项目完结日志）、skill（合并）。
 
@@ -93,7 +91,7 @@ docs/work/<项目>/
 1. 扫描子计划清单，读取各子计划 frontmatter `status`
 2. 按依赖图筛出依赖已全部 `completed` 的子计划
 3. 取清单声明顺序第一个可激活的子计划，激活并执行子计划流程
-4. 子计划完成（closure 通过）→ 回到 1
+4. 子计划完成（qa 通过）→ 回到 1
 5. 全部 `completed` → 集成审计
 6. 无可激活子计划但存在未完成 → 检查 `blocked`：有则报告等人类决策；无则回到 1 等待依赖满足
 
@@ -107,17 +105,17 @@ docs/work/<项目>/
 
 ## 集成审计
 
-最后一个子计划 closure 通过后自动切入：
+最后一个子计划 qa 通过后自动切入：
 
 1. 回归检查已验证表面
 2. 对照总计划集成关卡逐条验证
 3. 检查跨子计划公共契约兼容性
 
-通过 → 项目完结。未通过 → 按依赖图反向追溯回退相关子计划。子计划各自的闭环审计不能替代集成审计。
+通过 → 项目完结。未通过 → 按依赖图反向追溯回退相关子计划。子计划各自的 qa 验证不能替代集成审计。
 
 ## 项目完结
 
 集成审计通过后：
-1. 追加项目完结日志（见 `log/README.md` §项目完结条目）
+1. 执行流程管理（见 `process-management/README.md`）— 含归档、经验记录、上下文更新、日志追加、错误模式检测
 2. 总计划 frontmatter `status` → `completed`
 3. 子计划 registry 状态改为 `completed`；总计划目录保留为归档

@@ -28,16 +28,32 @@ plan.md 存在，frontmatter type/status/autonomy 合法。
 
 `Test-Path` 确认 plan-audit.md 存在，裁决 PASS。
 
+
+## 完成报告
+
+完成证明通过后，输出以下块：
+
+`
+**总结：** [1-2 句话总结本阶段产出]
+**阻塞/顾虑：** [仅在有阻塞或顾虑时出现此字段]
+**下一步：** 当前命中 [退出路由中的实际条件]，等待人类确认后进入 [对应去向]。
+`
+
 ## 退出路由
+
+完成证明通过后，等待人类确认才进入下一阶段。禁止自动推进。
+
 
 | 条件 | 去向 |
 |------|------|
 | PASS + standalone/sub | → implement |
 | PASS + master | → 编排循环 |
-| FAIL + standalone | → plan（修改后重审） |
-| FAIL + sub | → project（修改子计划后重审） |
-| FAIL + master | → project（调整子计划清单/依赖图/集成关卡） |
-
+| FAIL + standalone（< 3 次） | → plan（修改后重审） |
+| FAIL + sub（< 3 次） | → project（修改子计划后重审） |
+| FAIL + master（< 3 次） | → project（调整子计划清单/依赖图/集成关卡） |
+| FAIL + standalone（第 3 次） | → human（循环上限，暂停等人类决策） |
+| FAIL + sub（第 3 次） | → human（循环上限，暂停等人类决策） |
+| FAIL + master（第 3 次） | → human（循环上限，暂停等人类决策） |
 
 
 

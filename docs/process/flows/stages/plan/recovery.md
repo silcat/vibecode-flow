@@ -1,4 +1,4 @@
-# 中断恢复
+﻿# 中断恢复
 
 人类触发恢复（"继续"/关键词）后，AI 按本文档独立完成，不反复询问。
 
@@ -16,7 +16,7 @@
 2. 找第一个 `status: in-progress` 的阶段
 3. 无 in-progress 阶段，plan frontmatter `status` 为 `in-progress` → 取第一个 `planned` 阶段，将其改为 `in-progress`，从该阶段开始执行
 4. plan frontmatter `status` 为 `paused` → 将 plan status 改为 `in-progress`，同步 registry，回到 step 2
-5. 所有阶段均为 `completed`，plan 为 `in-progress` → 进入 closure 审计
+5. 所有阶段均为 `completed`，plan 为 `in-progress` → 进入 qa 审计
 
 ## 阶段内恢复
 
