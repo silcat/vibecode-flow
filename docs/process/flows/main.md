@@ -1,4 +1,4 @@
-# 主流程
+﻿# 主流程
 
 ## 用途
 
@@ -16,7 +16,7 @@
 | 阶段 | 条件 | 模块 |
 |------|------|------|
 | 收集输入 | 始终 | [collect](stages/collect/README.md) |
-| 澄清模糊 | discussion.md 存在模糊或矛盾 → 触发 | [clarify](stages/clarify/README.md) |
+| 澄清模糊 | 始终 | [clarify](stages/clarify/README.md) |
 | 合成需求 | 始终 | [requirement](stages/requirement/README.md) |
 | 摸底 | 始终 | [investigate](stages/investigate/README.md) |
 | 方案 | 始终 | [solution](stages/solution/README.md) |
