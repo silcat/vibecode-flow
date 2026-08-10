@@ -33,7 +33,7 @@
 ### 第 1 步：初始化
 
 创建 `.implement/` 目录，检查 `progress.md` 是否存在：
-- 存在 → 匹配首行 plan 路径，找最后一条 complete/fix，从下一个 task 恢复（断点续传）
+- 存在 → 匹配首行 plan 路径，找第一个未勾 checkbox 的任务行，按行状态续传：`in-progress` → 刷新验证后继续未完成部分；`待执行` → 从任务起点开始（规则见 [plan/recovery.md](../plan/recovery.md) §实施节点恢复）
 - 不存在 → 新建 `progress.md`（首次实施）
 
 ### 第 2 步：加载上下文
@@ -54,7 +54,8 @@
 - **高风险变更检测**：涉及部署配置、密钥、权限 → 在 task-N-report 关注点段标注，格式见 §风险门
 - 逐条自审 plan.md 该阶段 `**闭环关卡**` 的 checkbox，打勾
 - **提交代码**：`git add <变更文件>`（禁止 `git add -A`），约定式 commit message
-- 写入 `task-N-report.md`（含 commit hash）
+- 写入 `task-N-report.md`（含 commit hash + `## 代码定位`）
+- 维护 `progress.md` 台账行状态：启动任务 → 标 `in-progress`；完成 → `[x] complete`；中途中断（升级用户/人类暂停/无法继续）→ 行保持 `in-progress`，追加 partial commits + 恢复点（部分 task-N-report / 最后 commit / 当前 TDD 位置）再结束。每行含 checkbox + commit 范围 + 恢复点，同步 registry 实施节点列
 
 阻断处理：
 - 触公共契约/Touchpoints → 修复后继续
@@ -63,7 +64,7 @@
 
 ### 第 5 步：汇总
 
-同步 plan.md 阶段 status → `completed`，更新 `registry.md`。在对话中输出风险门汇总（如有）。
+同步 plan.md 阶段 checkbox 打勾、status → `completed`，更新 `registry.md` 流程节点。任务级进度已在第 4 步逐条同步。在对话中输出风险门汇总（如有）。
 
 ### 第 6 步：偏离自检
 
@@ -112,7 +113,7 @@
 
 ### F3：同步状态
 
-1. `progress.md` 追加修复记录：`Task N: fix round M (commits <hash>)`
+1. `progress.md` 追加台账行：`- [ ] Task N: fix round M (commits <hash>) — 恢复点: test-cases.md <FAIL id>`，修复完成打勾并同步 registry 实施节点
 2. 对话输出修复摘要（含风险门如有）
 
 ### F4：退出
@@ -181,12 +182,16 @@
 ## progress.md 格式
 
 ```
-# 实施 ledger — plan: docs/work/<branch>/plan.md
+# 实施 ledger — plan: docs/work/<branch>/plan.md（轻量模式写 plan: none）
 
-Task 1: complete (commits a1b2c3d..d4e5f6a)
-Task 2: complete (commits d4e5f6a..b7c8d9e)
-Task 1: fix round 1 (commits e0f1a2b..f3c4d5e)
+- [x] Task 1: complete (commits a1b2c3d..d4e5f6a) — 恢复点: task-1-report.md + git show a1b2c3d
+- [x] Task 2: complete (commits d4e5f6a..b7c8d9e) — 恢复点: task-2-report.md + git show d4e5f6a
+- [ ] Task 3: in-progress (partial commits e1f2a3b..f4a5b6c) — 恢复点: task-3-report.md（部分）+ git show f4a5b6c，TDD 已到 RED（plan.md 阶段恢复指引兜底）
+- [ ] Task 4: 待执行 — 恢复点: task-3-report.md 收尾状态
+- [ ] Task 1: fix round 1 — 恢复点: test-cases.md #A1 FAIL
 ```
+
+任务状态取值：`complete` = 已完成打勾；`in-progress` = 已开始未完成（中断时保持）；`待执行` = 未开始。恢复点优先用台账行，台账缺失时用 plan.md 阶段 `**恢复指引**` + `git log` 兜底。
 
 ## task-N-report.md 格式
 
@@ -195,6 +200,11 @@ Task 1: fix round 1 (commits e0f1a2b..f3c4d5e)
 
 ## 提交
 <commit-hash> — <commit message>
+
+## 代码定位
+| 文件 | 类/方法 | 关键行 | 变更类型 |
+|------|---------|--------|---------|
+| <路径> | <类>.<方法>() | :<行> | 新增 / 修改 / 删除 |
 
 ## 实现
 <实现摘要>
@@ -237,7 +247,7 @@ Task 1: fix round 1 (commits e0f1a2b..f3c4d5e)
 
 ```
 docs/work/<branch>/.implement/
-├── progress.md           ← 写入 commit 范围 + 修复轮次
+├── progress.md           ← 任务台账（checkbox + commit 范围 + 恢复点）
 ├── task-N-report.md      ← 每阶段写，自审详情 + TDD 证据 + commit hash
 └── review-final.diff     ← 终审 diff
 ```

@@ -8,7 +8,7 @@
 
 ```
 work/
-├── registry.md              ← 唯一状态仪表盘
+├── registry.md              ← 唯一状态仪表盘（流程节点 + 实施节点）
 ├── input/                   ← 共享原始材料（PM 笔记等）
 ├── <工作目录>/               ← 一次工作的所有产物
 │   ├── discussion.md        ← clarify 阶段产出
@@ -22,7 +22,7 @@ work/
 
 ```
 work/
-├── registry.md              ← 唯一状态仪表盘
+├── registry.md              ← 唯一状态仪表盘（流程节点 + 实施节点）
 ├── input/                   ← 共享原始材料
 ├── <项目目录>/               ← 总计划
 │   ├── plan.md              ← 总计划（含子计划清单、依赖图、集成关卡）
@@ -44,10 +44,13 @@ work/
 | `requirement.md` | `requirement` | 所有级别。子计划由 AI 从总需求提取生成 |
 | `research.md` | `research`（条件触发） | 完整、轻量 |
 | `plan.md` | `plan` | 所有级别。总计划 frontmatter `type: master`，子计划 `type: sub` |
+| `progress.md` | `implement`（.implement/ 下） | 实施中。任务台账（checkbox + commit 范围 + 恢复点） |
+| `test-cases.md` | `qa` | 实施后。用例 + 审计缺陷 + 裁定 |
+| `process-summary.md` | `process-management` | 收尾。流程管理摘要 |
 
 ## 规则
 
 - 目录名是人工可读的工作标识
 - 产物模板和阶段协议见 `docs/process/flows/stages/<stage>/`
-- 工作完成 → 目录保留，从 registry.md 删除对应行。总计划在所有子计划完成 + 集成审计通过后删除
+- 工作完成 → 目录保留，registry.md 对应行标记 `completed` 保留不删（归档由 process-management 执行）。总计划在所有子计划完成 + 集成审计通过后标记 completed
 - log 阶段产出写入 `docs/logs/`，不在 work 目录下

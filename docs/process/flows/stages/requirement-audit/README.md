@@ -6,7 +6,7 @@
 
 ## 进入条件
 
-requirement.md 存在。baseline 已执行（若触发）。
+requirement.md 存在；baseline 已执行。仅由级别判定 = 单计划/多计划路径进入（轻量直接实施，不经过本阶段）。
 
 ## 执行步骤
 
@@ -42,5 +42,4 @@ requirement.md 存在。baseline 已执行（若触发）。
 |------|------|
 | PASS + 单计划 | → plan |
 | PASS + 多计划 | → project |
-| PASS + 轻量 | → implement |
 | FAIL | 修复阻塞发现后重审 |

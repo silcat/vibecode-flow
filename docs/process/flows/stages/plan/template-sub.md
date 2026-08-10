@@ -1,6 +1,6 @@
 # 计划文件模板（子计划）
 
-适用：scope=多计划的子计划。计划是**实施契约**，不是路线图。
+适用：级别判定 = 多计划的子计划。计划是**实施契约**，不是路线图。
 
 ## 命名
 
@@ -11,7 +11,7 @@
 ```yaml
 ---
 branch: feature-xxx            # 对应的 git 分支
-status: planned                # 取值见 docs/work/registry.md §字段来源
+status: planned                # 取值见 docs/process/flows/stages/plan/recovery.md §注册表维护
 type: sub
 parent: ../plan.md             # 指向主 plan.md（相对路径），必填
 requirement: requirement.md    # AI 从总需求提取的需求文件（相对本目录），必填
@@ -59,13 +59,13 @@ blocker: none
 
 ## 阶段 N：[阶段名]
 
-- **状态**：planned。进入阶段→`in-progress`，完成→`completed`。同时同步 registry "当前激活"。
+- [ ] **状态**：进行中。进入阶段 → 保持未勾、同步 registry 流程节点为本阶段；完成 → 打勾并同步 registry 流程节点为下一阶段。
 - **依赖**：[前置阶段或条件，无则写"无"]
 - **目标**：[本阶段做什么]
 - **非目标**：[本阶段不做什么]
 - **触及面**：[变更的文件/模块]
 - **公共契约**：[必须保持兼容的接口，不适用写"无"]
-- **恢复指引**：[从哪个文件/类开始，当前进度一句话]
+- **恢复指引**：[入口文件:行 + 当前进度一句话。实施阶段每个 task 完成后更新为最新入口]
 - **闭环关卡**：
   - [ ] [具体可验证的条件]
   - [ ] [具体可验证的条件]
@@ -111,7 +111,7 @@ blocker: none
 
 ## 断点恢复规则
 
-中断后恢复流程见 [recovery.md](recovery.md)。
+- 阶段 checkbox 勾选状态 + `**恢复指引**` 是恢复主依据，中断后恢复流程见 [recovery.md](recovery.md)。
 
 ---
 

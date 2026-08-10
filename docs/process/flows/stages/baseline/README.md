@@ -6,13 +6,13 @@
 
 ## 进入条件
 
-solution.md 存在；requirement.md 存在。
+scope-analysis.md 存在；solution.md 存在；requirement.md 存在。
 
 ## 执行步骤
 
 ### 1. 影响分析
 
-对照 requirement 逐条提取，在对话中输出影响矩阵：
+对照 scope-analysis.md 的影响面与 requirement 逐条提取，在对话中输出影响矩阵：
 
 | 变更项 | 新增服务 | 职责变更 | 新技术 | 端口变更 |
 |--------|---------|---------|--------|---------|
@@ -37,6 +37,7 @@ solution.md 存在；requirement.md 存在。
 
 `git diff --stat docs/baseline/` 确认基线文件已更新，且变更与影响矩阵一致。
 
+> 若影响矩阵全为 N（无架构/技术基线变更）→ 声明"无基线变更"即通过。
 > 若 autonomy ≠ implement：影响矩阵须人类确认后才执行文件写入。
 
 
@@ -57,4 +58,4 @@ solution.md 存在；requirement.md 存在。
 
 | 条件 | 去向 |
 |------|------|
-| 完成 | → requirement-audit |
+| 完成 | → 级别判定（main.md 按级别追加序列） |

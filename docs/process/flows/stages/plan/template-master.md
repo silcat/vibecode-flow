@@ -1,6 +1,6 @@
 ﻿# 计划文件模板（总计划）
 
-适用：项目级别（scope=项目）。总计划是**编排契约**，不写实施细节。
+适用：项目级别（级别判定 = 多计划）。总计划是**编排契约**，不写实施细节。
 
 ## 命名
 
@@ -11,7 +11,7 @@
 ```yaml
 ---
 branch: feature-xxx            # 对应的 git 分支
-status: planned                # 取值见 docs/work/registry.md §字段来源
+status: planned                # 取值见 docs/process/flows/stages/plan/recovery.md §注册表维护
 
 type: master
 requirement: requirement.md    # 总需求文件路径

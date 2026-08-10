@@ -2,11 +2,11 @@
 
 ## 文件角色
 
-scope=多计划时，由 project 阶段触发。定义总计划/子计划的文件结构、调度、编排和集成审计规则。
+级别判定 = 多计划时，由 project 阶段触发。定义总计划/子计划的文件结构、调度、编排和集成审计规则。
 
 ## 首先阅读
 
-- `scope/README.md` — 多计划判定条件
+- `scope/README.md` — 拆分规则（多计划判定依据）
 - `project/README.md` — 项目拆分入口
 - `plan/template-master.md` — 总计划模板
 - `plan/template-sub.md` — 子计划模板
@@ -53,7 +53,7 @@ docs/work/<项目>/
 
 ## 状态派生
 
-状态取值见 `docs/work/registry.md` §字段来源。
+状态取值见 `docs/process/flows/stages/plan/recovery.md` §注册表维护。
 
 编排循环在每次子计划状态变更后，按以下规则更新总计划 frontmatter `status`：
 
@@ -82,7 +82,7 @@ docs/work/<项目>/
 | 3 | implement | [实施与验证](../implement/README.md) |
 | 4 | qa | [验证与闭环](../qa/README.md) |
 
-跳过的阶段：requirement-audit（总计划已通过）、scope（已判定为多计划）、log（合并到项目完结日志）、skill（合并）。
+跳过的阶段：requirement-audit（总计划已通过）、级别判定（已判定为多计划）、log（合并到项目完结日志）、skill（合并）。
 
 ### 编排循环
 

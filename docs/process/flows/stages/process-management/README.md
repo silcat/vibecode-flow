@@ -6,8 +6,8 @@ qa 验证通过后，对本次开发流程做归档、经验记录、上下文�
 
 ## 进入条件
 
-| scope | 条件 |
-|-------|------|
+| 级别 | 条件 |
+|------|------|
 | 轻量 / 单计划 | `test-cases.md` 存在且 `## 裁定` Status = DONE / Route = done（qa 通过，人类已确认） |
 | 多计划 | 集成审计通过（见 [program-management.md](../project/program-management.md) §集成审计） |
 
@@ -15,7 +15,7 @@ qa 验证通过后，对本次开发流程做归档、经验记录、上下文�
 
 | # | 步骤 |
 |---|------|
-| 1 | 归档计划：plan.md frontmatter `status` → `completed`，同步更新 `registry.md`；`docs/work/<branch>/` 目录标记为归档 |
+| 1 | 归档：plan.md frontmatter `status` → `completed`；registry 工作项行状态 → `completed`（行保留、实施节点保留尾行快照），清除"当前激活"；`docs/work/<branch>/` 目录标记为归档 |
 | 2 | 记录经验教训：将本次开发中发现的可用知识写回文档 — 可复用的模式 → `docs/baseline/context/`；实质性偏离 → `docs/retro/`；非显而易见回归 → `docs/bugs/` |
 | 3 | 评估上下文影响：本次变更是否改变了模块边界、公共契约、验证命令或技术基线 → 是则更新 `docs/baseline/context/` 和 `docs/baseline/standards/` 中受影响的文件 |
 | 4 | 跨模块流程检查：搜索 `docs/flows/` 的"边界"列，若命中则判断本次改动是否改变了调用序列、通道或失败策略 → 是则更新对应 flow |

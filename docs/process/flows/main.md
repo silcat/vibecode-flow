@@ -2,7 +2,7 @@
 
 ## 用途
 
-需求工作流入口。当意图检测判定路由为 `需求` 时进入本文件。公共阶段始终执行，investigate → solution 后进入 scope 判定，按级别追加差异序列。
+需求工作流入口。当意图检测判定路由为 `需求` 时进入本文件。公共阶段始终执行，investigate → solution → 范围判定 → 更新基线，之后执行级别判定并按级别追加差异序列。
 
 ## 首先阅读
 
@@ -25,13 +25,13 @@
 
 跳过判定由本文件持有，阶段 README 不内置执行条件。
 
-## scope 退出：按级别追加序列
+## 级别判定：按级别追加序列
 
-| 级别 | 条件 | 追加序列 |
-|------|------|---------|
-| 轻量 | scope-analysis.md 判定 = 轻量 | implement → qa → 流程管理 |
-| 单计划 | scope-analysis.md 判定 = 单计划 | requirement-audit → plan → plan-audit → implement → qa → 流程管理 |
-| 多计划 | scope-analysis.md 判定 = 多计划 | requirement-audit → project → plan-audit（总计划）→ 编排循环（每个子计划: plan → plan-audit → implement → qa）→ 集成审计 → 流程管理 |
+| 级别 | 条件                          | 追加序列 |
+|------|-----------------------------|---------|
+| 轻量 | scope-analysis.md 判定级别 = 轻量 | implement → qa → 流程管理 |
+| 单计划 | scope-analysis.md 判定级别 = 单计划  | requirement-audit → plan → plan-audit → implement → qa → 流程管理 |
+| 多计划 | scope-analysis.md 判定级别 = 多计划  | requirement-audit → project → plan-audit（总计划）→ 编排循环（每个子计划: plan → plan-audit → implement → qa）→ 集成审计 → 流程管理 |
 
 > scope=单计划 序列中的阶段不另设独立条件——scope 判为单计划已编码了它们的触发前提。scope 的判定现基于 solution.md（已决策的方案），而非猜测。
 
@@ -67,10 +67,9 @@
 ## 更新原则
 
 - 新增流程阶段 → 同步更新公共序列（如属公共）和模块索引；评估是否需要多计划级别覆盖
-- 新增 scope 级别 → scope 退出表增加一行；同步更新 [scope/README.md](stages/scope/README.md) 判定条件
+- 新增级别 → 级别判定表增加一行；同步更新 [scope/README.md](stages/scope/README.md) 的轻量条件检查与拆分规则
 - 阶段跳过条件变更 → 仅修改本文件序列表，阶段 README 不动
 - 阶段顺序变更 → 检查 [program-management.md](stages/project/program-management.md) 子计划生命周期截断序列和 [qa/README.md](stages/qa/README.md) 退出路由引用是否仍一致
-
 
 
 

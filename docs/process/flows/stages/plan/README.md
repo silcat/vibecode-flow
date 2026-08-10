@@ -2,19 +2,19 @@
 
 ## 文件角色
 
-根据 scope 级别产出计划文件，作为实施契约。
+根据级别判定（单计划/多计划）产出计划文件，作为实施契约。轻量不进入本阶段。
 
-- scope=单计划 → 产出 1 个 standalone 计划
-- scope=多计划 → 总计划由 project 阶段产出，本阶段负责填充子计划细节
+- 级别判定 = 单计划 → 产出 1 个 standalone 计划
+- 级别判定 = 多计划 → 总计划由 project 阶段产出，本阶段负责填充子计划细节
 
 ## 进入条件
 
-| scope | 前提 |
-|-------|------|
+| 级别判定 | 前提 |
+|----------|------|
 | 单计划 | requirement-audit 已通过 |
 | 子计划 | project 阶段已产出总计划 + 编排循环已激活 |
 
-investigate.md + solution.md 存在（若 scope ≠ 轻量）。
+investigate.md + solution.md 存在。
 
 ## 执行步骤
 
@@ -36,8 +36,8 @@ investigate.md + solution.md 存在（若 scope ≠ 轻量）。
 
 ## 产出物
 
-| scope | 路径 |
-|-------|------|
+| 级别判定 | 路径 |
+|----------|------|
 | 单计划 | `docs/work/<目录>/plan.md` |
 | 子计划 | `docs/work/<总目录>/<子计划>/plan.md` |
 

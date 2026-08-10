@@ -95,9 +95,9 @@ requirement.md、investigate.md、solution.md 存在。solution 阶段完成证�
 
 完成证明通过后，等待人类确认才进入下一阶段。禁止自动推进。
 
+完成证明通过后，等待人类确认才进入下一阶段。禁止自动推进。
+
 | 条件 | 去向 |
 |------|------|
-| 判定 = 轻量 | → implement |
-| 判定 = 单计划 | → requirement-audit |
-| 判定 = 多计划 | → requirement-audit |
-| 方案信息不足以判定 | → solution |
+| 完成 | → baseline |
+| 方案信息不足以判定范围 | → solution |
