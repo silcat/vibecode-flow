@@ -8,7 +8,7 @@ qa 验证通过后，对本次开发流程做归档、经验记录、上下文�
 
 | scope | 条件 |
 |-------|------|
-| 轻量 / 单计划 | `test-cases.md` 存在且 `## 裁定` Route = human（qa 通过） |
+| 轻量 / 单计划 | `test-cases.md` 存在且 `## 裁定` Status = DONE / Route = done（qa 通过，人类已确认） |
 | 多计划 | 集成审计通过（见 [program-management.md](../project/program-management.md) §集成审计） |
 
 ## 执行步骤

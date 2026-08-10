@@ -54,6 +54,6 @@ implement 阶段不再启容器或做手动流程验证。
 
 ## 关联
 
-- 闭环审计提示词：qa 阶段闭环判定（见 qa-agent.toml）
+- 闭环审计提示词：qa 阶段闭环判定（见 docs/process/flows/stages/qa/README.md）
 - 代码质量审计提示词：`docs/skills/audit/code-quality-audit-prompt.md`
 - 路由协议：`docs/process/protocols/routing.md` 阶段 ⑩

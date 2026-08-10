@@ -34,8 +34,8 @@
 
 | 级别 | 范围 | 判定 |
 |------|------|------|
-| 封锁性 | 安全漏洞、数据丢失、破坏性变更、保护区触碰 | → test-cases.md 追加 TODO |
-| 高 | 性能问题、空安全、缺失错误处理 | → test-cases.md 追加 TODO |
+| 封锁性 | 安全漏洞、数据丢失、破坏性变更、保护区触碰 | → test-cases.md `## 审计缺陷` 追加 TODO（编号 A<N>） |
+| 高 | 性能问题、空安全、缺失错误处理 | → test-cases.md `## 审计缺陷` 追加 TODO（编号 A<N>） |
 | 中 | 代码坏味道、可维护性 | → 仅报告，不阻塞 |
 | 低 | 风格、小优化 | → 忽略 |
 
@@ -48,11 +48,11 @@
 
 ## 产出
 
-P0/P1 发现 → 追加到 `test-cases.md`：
+P0/P1 发现 → 追加到 `test-cases.md` `## 审计缺陷`（独立编号 A1/A2…，不绑定 task）：
 
 ```
-| # | 用例 | 来源 | 类型 | 结果 |
-| N | cancelOrder 缺 @Transactional | code-audit P0 | 单元 | TODO |
+| # | 严重级别 | 问题 | 范围 | 结果 |
+| A1 | P0 | cancelOrder 缺 @Transactional | 全局 | TODO |
 ```
 
 ## 完成检查
@@ -66,5 +66,5 @@ P0/P1 发现 → 追加到 `test-cases.md`：
 
 ## 关联
 
-- qa 工作流：`.codex/agents/qa-agent.toml` 步骤 4
+- qa 工作流：`docs/process/flows/stages/qa/README.md` 工作流 2
 - 保护区定义：`docs/baseline/context/project-context.md`

@@ -39,8 +39,8 @@
 
 ## 产出
 
-审计结果写入 `test-cases.md` `## 审计记录`。
+审计结论写入 `test-cases.md` `## 审计记录` 的 `**审计结论:**`（通过闭环审计 / 需要修改 / —未完成），详细发现追加到记录表。审计结论必须与 `## 裁定` Status 一致：通过闭环审计 → DONE，需要修改 → BLOCKED，未完成 → BLOCKED/human。
 
 ## 关联
 
-- qa 工作流：`.codex/agents/qa-agent.toml` 步骤 5
+- qa 工作流：`docs/process/flows/stages/qa/README.md` 工作流 3

@@ -49,14 +49,14 @@ plan-audit 通过
      │
      ▼
 ┌─ qa ──────────────────────────────────────────────────────────────────┐
-│  qa-agent 执行：                                                      │
+│  主 agent 执行：                                                      │
 │    读取 plan.md 闭环关卡 + task-N-report.md + git diff                │
 │    生成 test-cases.md（用例 + code-audit 发现）                        │
 │    HTTP 验证 + 回归测试 + 代码审查                                     │
 │    写入 ## 裁定                                                       │
 │                                                                       │
 │  裁定分流：                                                           │
-│    Route: DONE      → process-management（归档 + rm .sdd/ + log）                 │
+│    Route: done      → process-management（归档 + rm .sdd/ + log）                 │
 │    Route: implement → 回到 implement 修复模式                         │
 │    Route: human     → 暂停等人                                        │
 └───────────────────────────────────────────────────────────────────────┘
@@ -73,7 +73,7 @@ plan-audit 通过
 │  implement-report.md 覆盖写入                                          │
 │  → 再进 qa                                                           │
 │                                                                       │
-│  回路：implement → qa → implement → qa → ... → qa Route: DONE        │
+│  回路：implement → qa → implement → qa → ... → qa Route: done        │
 └───────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -161,8 +161,15 @@ mvn test → 3 PASS
 ---
 ## Fix Round 1
 
+### 修改依据
+- 触发项：#2（test-cases.md `## 用例`）| 原结果：FAIL（阶段 1）
+- 失败证据：RED 输出（异常类型不匹配）
+
 ### 提交
 f3c4d5e — fix(repo): use DuplicateEmailException instead of RuntimeException
+
+### 覆盖用例
+#2
 
 ### 修复内容
 RuntimeException → DuplicateEmailException
@@ -212,21 +219,39 @@ UserRepositoryTest#shouldThrowOnDuplicateEmail
 
 ## 用例
 
-| # | 来源 | 用例 | 验证方式 | 结果 |
-|---|------|------|---------|------|
-| 1 | 阶段 1 | save 后 findByEmail 能查到 | HTTP | PASS |
-| 2 | 阶段 1 | 重复邮箱抛 DuplicateEmailException | HTTP | PASS |
-| 3 | 阶段 2 | 新邮箱 → 201 + JWT | HTTP | PASS |
-| 4 | 阶段 2 | 空邮箱 → 400 | HTTP | PASS |
-| 5 | 阶段 3 | 正确密码 → 200 + JWT | HTTP | PASS |
-| 6 | 阶段 3 | 错误密码 → 401 | HTTP | PASS |
-| 7 | code-audit | 密码未哈希存储 | 审查 | TODO |
+| # | 来源 | 关联 task | 用例 | 类型 | 结果 |
+|---|------|-----------|------|------|------|
+| 1 | 阶段 1 | task-1-report.md | save 后 findByEmail 能查到 | HTTP | PASS |
+| 2 | 阶段 1 | task-1-report.md | 重复邮箱抛 DuplicateEmailException | HTTP | PASS |
+| 3 | 阶段 2 | task-2-report.md | 新邮箱 → 201 + JWT | HTTP | PASS |
+| 4 | 阶段 2 | task-2-report.md | 空邮箱 → 400 | HTTP | PASS |
+| 5 | 阶段 3 | task-3-report.md | 正确密码 → 200 + JWT | HTTP | PASS |
+| 6 | 阶段 3 | task-3-report.md | 错误密码 → 401 | HTTP | PASS |
+
+## 审计缺陷
+
+| # | 严重级别 | 问题 | 范围 | 结果 | 修复轮 |
+|---|---------|------|------|------|--------|
+| A1 | P0 | 密码未哈希存储 | 全局 | PASS | R1 |
+
+## 修复历史
+
+| # | 轮次 | 提交 | 结果 |
+|---|------|------|------|
+| A1 | R1 | f3c4d5e | PASS（R1） |
 
 ## 裁定
 
 **Status:** DONE
-**Route:** —
-**Summary:** HTTP: 6/6 | 回归: 14/14 | 审查: 0 TODO
+**Route:** done
+**Summary:** 用例 HTTP: 6/6 | 回归: 14/14 | 审计缺陷: 0 TODO
+
+## 审计记录
+
+**审计结论:** 通过闭环审计
+
+| 日期 | 阶段 | 操作/发现 |
+|------|------|---------|
 ```
 
 ---
@@ -241,7 +266,7 @@ docs/work/<branch>/.sdd/
 └── review-final.diff     ← 终审 diff
 ```
 
-生命周期：qa Route: DONE → process-management 执行 `.sdd/` 清理 → 流程结束
+生命周期：qa Route: done → process-management 执行 `.sdd/` 清理 → 流程结束
 
 ---
 
@@ -259,7 +284,7 @@ docs/work/<branch>/.sdd/
 
 ## 五、不变的部分
 
-- qa-agent 定义
+- qa 阶段（qa-agent 定义已合并入 qa/README.md，不委派子代理）
 - test-cases.md 生成逻辑
 - plan-audit / process-management
 - 前置路由、意图检测
@@ -281,5 +306,5 @@ docs/work/<branch>/.sdd/
 ## 七、回路终止
 
 ```
-qa Route: DONE → process-management（归档 + rm -rf .sdd/ + log）→ 流程结束
+qa Route: done → process-management（归档 + rm -rf .sdd/ + log）→ 流程结束
 ```
